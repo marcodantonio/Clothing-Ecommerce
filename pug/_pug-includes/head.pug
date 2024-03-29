@@ -1,0 +1,49 @@
+mixin ie(condition)
+  <!--[!{condition}]>
+  block
+  <![endif]-->
+
+meta(charset='utf-8')
+meta(http-equiv='X-UA-Compatible', content='IE=edge')
+title Varkala E-commerce Theme
+meta(name='description', content='')
+meta(name='viewport', content='width=device-width, initial-scale=1')
+meta(name='robots', content='all,follow')
+
+// Custom font
+link(rel='stylesheet', href=path + 'fonts/stylesheet.css')
+
+// Swiper
+link(rel='stylesheet', href=path + 'vendor/swiper/css/swiper.min.css')
+
+// AOS - AnimationOnScroll
+link(rel='stylesheet', href=path + 'vendor/aos/aos.css')
+
+// Custom Scrollbar
+link(rel='stylesheet', href=path + 'vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css')
+
+if (priceSlider)
+  // Price Slider Stylesheets 
+  link(rel='stylesheet', href=path + 'vendor/nouislider/nouislider.css')
+
+if (map)
+  // Leaflet CSS - For the map
+  link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.css')
+
+
+// Theme stylesheet
+link(rel='stylesheet', href=path + 'css/style.default.css', id='theme-stylesheet')
+
+// Custom stylesheet - for your changes
+link(rel='stylesheet', href=path + 'css/custom.css')
+
+// Favicon
+link(rel='shortcut icon', href=path + 'img/favicon.png')
+
+// FontAwesome
+link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.10.0/css/all.css')
+
+// Tweaks for older IEs
++ie('if lt IE 9')
+    script(src='https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js')
+    script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')

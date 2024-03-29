@@ -1,0 +1,37 @@
+extends _pug-includes/layout.pug
+
+block content
+
+    - var breadcrumbs = []
+    - breadcrumbs.push({name: 'Home', link: 'index.html'})
+    - breadcrumbs.push({name: 'Order confirmed'})
+    - var heroHeading = 'Order confirmed'
+    - var heroText = '<div role="alert" class="d-flex align-items-center alert alert-success"><svg class="svg-icon w-3rem h-3rem svg-icon-light flex-shrink-0 mr-3"><use xlink:href="#checked-circle-1"> </use></svg>Your order is confirmed</div>'
+    
+    include _pug-includes/inc-hero.pug
+
+    // Order confirmed
+    section.pb-6
+        .container
+           
+            p.lead Thank you, Julie. Your order is confirmed.
+            p.lead.mb-5 Your order hasn't shipped yet but we will send you ane email when it does. 
+            p.mb-6
+                a.btn.btn-outline-dark(href="customer-order.html") View or manage your order
+
+            .p-5.bg-gray-100
+                .row
+                    .col-6.col-lg-3.mb-5.mb-lg-0
+                        .text-sm.text-uppercase.text-muted.mb-3 Order no.
+                        span.h5 2019
+                    .col-6.col-lg-3.mb-5.mb-lg-0
+                        .text-sm.text-uppercase.text-muted.mb-3 Date
+                        span.h5 Oct 21, 2019
+                    .col-6.col-lg-3
+                        .text-sm.text-uppercase.text-muted.mb-3 Total
+                        span.h5 $450               
+                    .col-6.col-lg-3
+                        .text-sm.text-uppercase.text-muted.mb-3 Shipping
+                        span.h5 DHL          
+
+                        

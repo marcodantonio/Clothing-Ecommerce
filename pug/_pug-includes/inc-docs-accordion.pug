@@ -1,0 +1,20 @@
+.row
+    .col-xl-9
+        #accordion(role='tablist')
+
+            - items = [1, 2, 3]
+
+            each val in items
+
+                - showClass = ''
+                - expanded = 'false'
+                if (val == 1)
+                    - showClass = 'show'
+                    - expanded = 'true'
+
+                div
+                    a.block-toggler.py-3(data-toggle='collapse', href='#collapse ' + val, aria-expanded=expanded, aria-controls='collapse ' + val) Option #{val}
+                        span.block-toggler-icon
+                    .collapse(role='tabpanel', aria-labelledby='heading' + val,  data-parent='#accordion', id='collapse ' + val, class=showClass)
+                        .p-3
+                            p.text-muted.mb-0 #{dummyText[val]}

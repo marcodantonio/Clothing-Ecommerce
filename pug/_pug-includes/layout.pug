@@ -1,0 +1,45 @@
+include dummyText
+include mixins.pug
+doctype
+html(lang='en')
+  block vars
+    - var test = ''
+
+  if (!path)
+    - var path = ''
+
+  - var docLinks = {'docs/index.html': 'Introduction', 'docs/directory-structure.html': 'Directory structure', 'docs/gulp.html': 'Gulp', 'docs/customizing-css.html': 'Customizing CSS', 'docs/credits.html': 'Credits', 'docs/changelog.html': 'Changelog'}
+  - var componentLinks = {'docs/components-bootstrap.html': 'Bootstrap', 'docs/components-sell.html': 'Theme', 'component-variants/header.html': 'Header variants <span class="badge badge-warning ml-1">New</span>'}    
+
+  head
+    include head.pug
+  
+  if (active == 'docs')
+    - var bodyAttrs = {'data-spy': "scroll", 'data-target': "#components-nav"}
+  else
+    - var bodyAttrs = {}
+
+  body&attributes(bodyAttrs)
+      //- .container-boxed
+      include navbar.pug
+
+      block content
+
+      include inc-sidebar-cart.pug
+
+      include inc-sidebar-modal.pug
+      
+      include inc-login-modal.pug
+
+      if quickViewModal
+        include inc-modal.pug
+
+      include footer.pug
+
+      if (locals.styleSwitcher)
+        //- include style-switcher
+
+      include scripts.pug
+
+      if photoSwipe
+        include inc-photoswipe.pug

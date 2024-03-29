@@ -1,0 +1,137 @@
+// Navbar Example 1
+nav(class="navbar navbar-expand-lg navbar-light shadow mb-3")
+    .container-fluid   
+        // Navbar Header  
+        a.navbar-brand(href="index.html") Varkala  
+        
+        button.navbar-toggler.navbar-toggler-right(type="button", data-toggle="collapse", data-target="#navbarExample", aria-controls="navbarExample", aria-expanded="false", aria-label="Toggle navigation")
+            i.fa.fa-bars
+        
+        #navbarExample.collapse.navbar-collapse
+            ul.navbar-nav.mr-auto
+                li.nav-item.active
+                    a.nav-link(href='#')
+                        | Home 
+                        span.sr-only (current)
+                li.nav-item
+                    a.nav-link(href='#') Link
+                li.nav-item.dropdown
+                    a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                        | Dropdown
+                    .dropdown-menu(aria-labelledby='navbarDropdown')
+                        a.dropdown-item(href='#') Action
+                        a.dropdown-item(href='#') Another action
+                        .dropdown-divider
+                        a.dropdown-item(href='#') Something else here
+                li.nav-item
+                    a.nav-link.disabled(href='#') Disabled
+            form.form-inline.my-2.my-lg-0
+                input.form-control.mr-sm-2(type='search', placeholder='Search', aria-label='Search')
+                button.btn.btn-outline-dark.my-2.my-sm-0(type='submit') Search
+
+// Navbar Example 2
+nav(class="navbar navbar-expand-lg navbar-light border mb-3")
+    .container-fluid   
+        // Navbar Header  
+        a.navbar-brand(href='index.html') Varkala
+        ul.list-inline.mb-0.d-block.d-lg-none
+            li.list-inline-item.mr-3
+                a(href="#", data-toggle="modal", data-target="#loginModal").text-dark.text-hover-primary
+                    +svgIcon('avatar-1','navbar-icon')   
+            li.list-inline-item.mr-3
+                a(href=path + "wishlist.html").text-dark.text-hover-primary.position-relative
+                    +svgIcon('heart-1','navbar-icon')   
+                    .navbar-icon-badge 3
+            li.list-inline-item.position-relative.mr-3
+                a(href="#", data-toggle="modal", data-target="#sidebarCart").text-dark.text-hover-primary
+                    +svgIcon('retail-bag-1','navbar-icon')   
+                    .navbar-icon-badge 5
+                    
+        button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarExample2', aria-controls='navbarExample2', aria-expanded='false', aria-label='Toggle navigation')
+            +svgIcon('menu-hamburger-1','navbar-icon') 
+        
+        #navbarExample2.collapse.navbar-collapse
+            ul.navbar-nav.mt-3.mt-lg-0
+                li.nav-item.active
+                    a.nav-link(href='#')
+                        | Home 
+                        span.sr-only (current)
+                li.nav-item
+                    a.nav-link(href='#') Link
+                li.nav-item.dropdown
+                    a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                        | Dropdown
+                    .dropdown-menu(aria-labelledby='navbarDropdown')
+                        a.dropdown-item(href='#') Action
+                        a.dropdown-item(href='#') Another action
+                        .dropdown-divider
+                        a.dropdown-item(href='#') Something else here
+            ul.ml-auto.list-inline.mb-0.d-none.d-lg-block
+                li.list-inline-item.mr-3
+                    a(href="#", data-toggle="modal", data-target="#loginModal").text-dark.text-hover-primary
+                        +svgIcon('avatar-1','navbar-icon')   
+                li.list-inline-item.mr-3
+                    a(href=path + "wishlist.html").text-dark.text-hover-primary.position-relative
+                        +svgIcon('heart-1','navbar-icon')   
+                        .navbar-icon-badge 3
+                li.list-inline-item.position-relative.mr-3
+                    a(href="#", data-toggle="modal", data-target="#sidebarCart").text-dark.text-hover-primary
+                        +svgIcon('retail-bag-1','navbar-icon')   
+                        .navbar-icon-badge 5
+                li.list-inline-item
+                    a(href="#", data-toggle="modal", data-target="#sidebarRight").text-dark.text-hover-primary
+                        +svgIcon('menu-hamburger-1','navbar-icon') 
+
+// Navbar Example 3
+nav(class="navbar navbar-expand-lg navbar-dark bg-dark border")
+    .container-fluid   
+        // Navbar Header  
+        a.navbar-brand(href="index.html") Varkala  
+        ul.list-inline.mb-0.d-block.d-lg-none
+            li.list-inline-item.mr-3
+                a(href="#", data-toggle="modal", data-target="#loginModal").text-white.text-hover-primary
+                    +svgIcon('avatar-1','navbar-icon')   
+            li.list-inline-item.mr-3
+                a(href=path + "wishlist.html").text-white.text-hover-primary.position-relative
+                    +svgIcon('heart-1','navbar-icon')   
+                    .navbar-icon-badge 3
+            li.list-inline-item.position-relative.mr-3
+                a(href="#", data-toggle="modal", data-target="#sidebarCart").text-white.text-hover-primary
+                    +svgIcon('retail-bag-1','navbar-icon')   
+                    .navbar-icon-badge 5
+        
+        button.navbar-toggler.navbar-toggler-right(type="button", data-toggle="collapse", data-target="#navbarExample3", aria-controls="navbarExample3", aria-expanded="false", aria-label="Toggle navigation")
+            +svgIcon('menu-hamburger-1','navbar-icon') 
+        
+        #navbarExample3.collapse.navbar-collapse
+            ul.navbar-nav.mt-3.mt-lg-0
+                li.nav-item.active
+                    a.nav-link(href='#')
+                        | Home 
+                        span.sr-only (current)
+                li.nav-item
+                    a.nav-link(href='#') Link
+                li.nav-item.dropdown
+                    a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                        | Dropdown
+                    .dropdown-menu(aria-labelledby='navbarDropdown')
+                        a.dropdown-item(href='#') Action
+                        a.dropdown-item(href='#') Another action
+                        .dropdown-divider
+                        a.dropdown-item(href='#') Something else here
+            ul.ml-auto.list-inline.mb-0.d-none.d-lg-block
+                li.list-inline-item.mr-3
+                    a(href="#", data-toggle="modal", data-target="#loginModal").text-white.text-hover-primary
+                        +svgIcon('avatar-1','navbar-icon')   
+                li.list-inline-item.mr-3
+                    a(href=path + "wishlist.html").text-white.text-hover-primary.position-relative
+                        +svgIcon('heart-1','navbar-icon')   
+                        .navbar-icon-badge 3
+                li.list-inline-item.position-relative.mr-3
+                    a(href="#", data-toggle="modal", data-target="#sidebarCart").text-white.text-hover-primary
+                        +svgIcon('retail-bag-1','navbar-icon')   
+                        .navbar-icon-badge 5
+                li.list-inline-item
+                    a(href="#", data-toggle="modal", data-target="#sidebarRight").text-white.text-hover-primary
+                        +svgIcon('menu-hamburger-1','navbar-icon') 
+     

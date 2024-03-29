@@ -1,0 +1,51 @@
+extends _pug-includes/layout.pug
+
+block vars
+    - var active = 'detail'  
+    - var current = 'detail-3.html'
+    - var photoSwipe = true
+    - var imageZoom = true    
+    - var quickViewModal = true;
+
+block content
+
+    - var breadcrumbs = []
+    - breadcrumbs.push({name: 'Home', link: 'index.html'})
+    - breadcrumbs.push({name: 'Jeans', link: 'category-full.html'})
+    - breadcrumbs.push({name: 'Push-up Jeans'})
+    
+    - var images = []
+    - images.push({image: 'img/product/detail-3-gray.jpg', caption: '', width: '1200', height: '1200'})        
+    - images.push({image: 'img/product/detail-1-gray.jpg', caption: '', width: '1200', height: '1200'})
+    - images.push({image: 'img/product/detail-2-gray.jpg', caption: '', width: '1200', height: '1200'})
+    - images.push({image: 'img/product/detail-4-gray.jpg', caption: '', width: '1200', height: '1200'})    
+    - images.push({image: 'img/product/detail-5-gray.jpg', caption: '', width: '1200', height: '1200'})   
+    - images.push({image: 'img/product/detail-6.jpg', caption: '', width: '1200', height: '1200'})   
+    //- - var detail3 = true
+
+    section
+        .container-fluid.px-xl-7.pt-5.pb-3.pb-lg-6
+            include _pug-includes/inc-detail-alert.pug
+
+            ul(class=`breadcrumb ${breadcrumbClass}`)
+                each val in breadcrumbs
+                    if (val.link)
+                        li.breadcrumb-item
+                            a(href=val.link) #{val.name}
+                    else
+                        li.breadcrumb-item.active #{val.name}            
+            .row
+                .col-lg-6.col-xl-7.pt-4.order-2.order-lg-1.photoswipe-gallery
+                     each val, index in images
+                        - var number = index + 1
+                        a.d-block.mb-4(href=val.image, data-caption=`Push-up Jeans ${number} - Caption text`, data-toggle="photoswipe", data-width=val.width, data-height=val.height) 
+                            div(data-toggle="zoom", data-image=val.image)
+                                img.img-fluid(src=val.image, alt='Push-up Jeans ' + number)
+    
+                .col-lg-6.col-xl-4.pt-4.order-1.order-lg-2.ml-lg-auto
+                        .sticky-top(style="top: 100px;")
+                            include _pug-includes/inc-detail-main.pug
+
+    include _pug-includes/inc-detail-tabs.pug
+    
+    include _pug-includes/inc-similar.pug

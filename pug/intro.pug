@@ -1,0 +1,116 @@
+extends _pug-includes/layout-demo.pug
+
+block vars
+    - var active = 'about'  
+    
+block content
+
+    nav(class="navbar navbar-expand-lg navbar-light bg-white px-lg-5")
+            a.navbar-brand(href='index.html') Varkala
+                        
+            a.btn.btn-dark.px-4.ml-auto(href="https://themes.getbootstrap.com/product/varkala-e-commerce-theme/") Purchase theme
+    .bg-gray-100.position-relative
+        .container.py-6.text-center
+            img.position-absolute(src="img/demo/monstera-1.png", alt="", style="width: 20vw; right: -5px; top: -20px;")
+            img.position-absolute(src="img/demo/monstera-2.png", alt="", style="width: 20vw; left: -20px; bottom: -150px; ")
+            .row.position-relative.z-index-10
+                .col-lg-10.mx-auto
+                    h6.text-uppercase.text-primary.mb-5 Welcome to Varkalas
+                    h4.display-4.mb-5 Minimal & Classy<br>Bootstrap 4 E-commerce Theme
+                    p.text-muted.mb-5    Varkala is an elegant Bootstrap 4 e-commerce theme and a perfect starting point for your next e-commerce site. Varkala contains a variety of pre-made pages, components, and options that will help you to kickstart your project’s development.
+                    p.text-muted.mb-5
+                        a.btn.btn-outline-dark(href="index.html", target="_blank") See the live demo
+
+
+            a(href="index.html", target="_blank")
+                img.position-relative.img-fluid.z-index-10.hover-scale(src="img/demo/mockup-top.jpg", alt="")
+
+    .container.py-7.text-center
+        
+        - var features = []
+        - features.push({name: 'Stunning design', text: 'This theme follows the latest design and typography trends.', icon: 'design-1'})
+        - features.push({name: 'Built for e-commerce', text: 'Mutliple variants for category listings, product details. Dedicated e-commerce beautiful icon sets.', icon: 'checkout-cart-1'})
+        - features.push({name: 'Developer-friendly', text: 'You can use it out-of-the-box, but if you need customizations, you will love the included Gulp & SCSS toolkit.', icon: 'google-chrome-1'})
+        - features.push({name: 'Variability', text: 'Each crucial e-commerce as category or product detail page comes in multiple variants. Choose the one that suits your needs best.', icon: 'stack-1'})
+        - features.push({name: 'Fast & dedicated support', text: 'We work closely with our customers to provide a high standard of support and quick bug fixes.', icon: 'customer-support-1'})
+        - features.push({name: 'Free & lifetime updates', text: 'Lifetime free updates are included in the price of this template.', icon: 'refresh-window-1'})
+
+        .row
+            each val, index in features
+                .col-sm-6.col-lg-4.mb-5
+                    .mb-5
+                        +svgIcon(val.icon, 'feature-icon text-primary mb-4')   
+                        h3.h6.text-uppercase.letter-spacing-2.mb-4 #{val.name}
+                        p.text-muted #{val.text}
+                    
+    
+    .bg-primary-100.position-relative
+        img.position-absolute(src="img/demo/monstera-1.png", alt="", style="width: 15vw; right: -65px; top: -150px;")
+        .container.py-6.text-center
+            
+            h2 Four Homepage variants
+            p.text-muted.mb-6 To get you started, Varkala includes four homepage variants and more are coming soon.
+
+            - var homes = []
+            - homes.push({name: 'Fashion', img: 'img/demo/home-1.jpg', link: 'index.html'})
+            - homes.push({name: 'Fashion', img: 'img/demo/home-2.jpg', link: 'index-2.html'})
+            - homes.push({name: 'Design', img: 'img/demo/home-3.jpg', link: 'index-3.html', label: 'New'})
+            - homes.push({name: 'Design', img: 'img/demo/home-4.jpg', link: 'index-4.html', label: 'New'})
+
+            .row
+                each val, index in homes
+                    .col-sm-6.mb-5
+                        if (val.label == 'New')
+                            .page-label.shadow New
+                        a.d-block.mb-4(href=val.link, target="_blank")
+                            img.img-fluid.shadow-lg.hover-scale(src=val.img, alt="val.name")
+                        h3.h6.text-uppercase
+                            a(href=val.link, target="_blank").text-reset #{val.name}
+
+    .container.py-7
+        .row
+            .col-lg-5.position-relative
+                img.img-fluid.shadow-lg.z-index-10.position-relative(src="img/demo/category-1.jpg", alt="")
+                img.img-fluid.position-relative.shadow-lg.w-75(src="img/demo/category-2.jpg", alt="", style="left: -100px; top: -50px;")
+            .col-lg-6.ml-lg-auto.d-flex.align-items-center
+                div
+                    h2.display-4.mb-5 <span class="font-weight-bold text-primary display-2">7</span> Category layout variants
+                    p.text-muted Choose based on your needs from <a href="category-full.html" target="_blank">Full width</a>, <a href="category-full-sidebar.html" target="_blank">Full width with category menu</a>, <a href="category-big-products.html" target="_blank">Full width with big products</a>, <a href="category-masonry.html" target="_blank">Fixed width & masonry</a> and more.
+
+    .bg-primary-100
+        .container.py-7
+            .row
+                .col-lg-6.d-flex.align-items-center
+                    div
+                        h2.display-4.mb-5 <span class="font-weight-bold text-primary display-2">3</span> Product details
+                        p.text-muted Opt for <a href="detail-1.html" target="_blank">Product with sticky info</a>, <a href="detail-2.html" target="_blank">Product with a background</a> or a <a href="detail-3.html" target="_blank">Standard product</a>. More variants are coming soon.
+
+                .col-lg-5.ml-lg-auto.position-relative
+                    img.img-fluid.shadow-lg.z-index-10.position-relative(src="img/demo/detail-1.jpg", alt="")
+                    img.img-fluid.position-absolute.shadow-lg.w-75(src="img/demo/detail-2.jpg", alt="", style="left: -50px; bottom: 0px;")
+                    img.img-fluid.position-relative.shadow-lg.w-75(src="img/demo/detail-3.jpg", alt="", style="right: -200px; top: -50px;")                    
+
+    .container.py-7
+        .row
+            .col-lg-5.position-relative
+                img.img-fluid.shadow-lg.z-index-10.position-relative(src="img/demo/other-2.jpg", alt="")
+                img.img-fluid.position-absolute.shadow-lg.w-75(src="img/demo/other-3.jpg", alt="", style="left: -200px; top: 30px;")
+                img.img-fluid.position-relative.shadow-lg.w-75(src="img/demo/other-1.jpg", alt="", style="left: -100px; top: -50px;")
+            .col-lg-6.ml-lg-auto.d-flex.align-items-center
+                div
+                    h2.display-4.mb-5 <span class="font-weight-bold text-primary display-2">20+</span> Other templates
+                    p.text-muted We got you covered! This themes comes with 20+ more additional templates you will need in an e-commerce project. <a href="cart.html" target="_blank">Shopping cart</a>, <a href="blog.html" target="_blank">Blog</a>, <a href="wishlist.html" target="_blank">Wishlist</a>, <a href="about.html" target="_blank">About us</a> pages, <a href="customer-orders.html" target="_blank">Customer pages</a> to name just a few. 
+                    p.text-muted Also, this landing page is built with the theme too. 😉
+
+
+    .bg-gray-100.position-relative
+        img.position-absolute(src="img/demo/monstera-2.png", alt="", style="width: 15vw; left: -20px; bottom: -0; ")
+        
+        .container.py-7.position-relative
+            img.position-absolute(src="img/demo/ipad-pro.jpg", alt="", style="top: 50%; width: 60%; max-height: 100%; right: -150px; transform: translateY(-50%);")
+            .row
+                .col-lg-6.d-flex.align-items-center
+                    div
+                        h2.display-2.mb-5 Varkala
+                        p.h2.text-primary.font-weight-light.mb-6 Kicstart your development with this Bootstrap 4 theme.
+                        a.btn.btn-lg.btn-outline-dark(href="https://themes.getbootstrap.com/product/varkala-e-commerce-theme/") Purchase theme

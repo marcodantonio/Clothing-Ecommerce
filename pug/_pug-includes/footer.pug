@@ -1,0 +1,60 @@
+// Footer
+footer
+    // Services block
+    .py-5.py-lg-6.bg-gray-100
+        .container
+            include inc-services.pug
+                    
+    // Main block - menus, subscribe form
+    .py-6.text-muted 
+        .container
+            .row
+                .col-lg-5.pr-lg-5.pr-xl-6.mb-5.mb-lg-0
+                
+                    h6.text-dark.letter-spacing-1.mb-4 Be in touch
+                    p.text-sm.mb-3  Lorem ipsum dolor sit amet, consectetur adipisicing elit. At itaque temporibus.
+                    
+                    form(action="#", id="newsletter-form")
+                        .input-group.input-group-underlined.mb-3
+                            input.form-control.form-control-underlined(type='email', placeholder='Your Email Address', aria-label='Your Email Address')
+                            .input-group-append.ml-0
+                                button.btn.btn-underlined.text-gray-700.py-0(type='button') 
+                                    +svgIcon('envelope-1','w-2rem h-2rem')                                       
+                .col-lg-7       
+                    .row                 
+                        - footerMenus = []
+                        - footerMenus.push({title: 'Shop', items: ['For Women', 'For Men', 'Stores', 'Our Blog', 'Shop']})
+                        - footerMenus.push({title: 'Company', items: ['Login', 'Register', 'Wishlist', 'Our Products', 'Checkouts']})
+                        - footerMenus.push({title: 'Your account', items: ['Login', 'Register', 'Wishlist', 'Our Products', 'Checkouts']})
+                        
+
+                        each val, index in footerMenus
+                            .col-lg-4
+                                a.d-lg-none.block-toggler.my-3(data-toggle="collapse", href="#footerMenu" + index, aria-expanded="false", aria-controls="footerMenu" + index) #{val.title}
+                                    span.block-toggler-icon
+
+                                // Footer collapsible menu
+                                .expand-lg.collapse(id="footerMenu" + index)
+                                    h6.text-dark.letter-spacing-1.mb-4.d-none.d-lg-block #{val.title}
+                                    ul.list-unstyled.text-sm.pt-2.pt-lg-0
+                                        each menuItem in val.items
+                                            li.mb-2 
+                                                a.text-muted.text-hover-dark.link-animated(href="#") #{menuItem}
+                        
+
+    // Copyright section of the footer
+
+    .py-4.font-weight-light.text-muted
+        .container
+            .row.align-items-center.text-sm.text-gray-500
+                .col-lg-4.text-center.text-lg-left
+                    p.mb-lg-0 &copy; 2020 Your company.  All rights reserved.
+                
+                .col-lg-8
+                    - footerLinks = ['Terms & Conditions', 'Privacy & cookies', 'Accessibility', 'Customer Data Promise']
+                    ul.list-inline.mb-0.mt-2.mt-md-0.text-center.text-lg-right
+                        each val in footerLinks
+                            li.list-inline-item 
+                                a.text-reset(href="#") #{val} 
+                    
+// /Footer end

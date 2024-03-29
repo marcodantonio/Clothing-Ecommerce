@@ -1,0 +1,8 @@
+#addToCartAlert.d-block
+    .mb-4.mb-lg-5(role='alert', class="alert alert-success")
+        .d-flex.align-items-center.pr-3
+            +svgIcon('checked-circle-1','d-none d-sm-block w-3rem h-3rem svg-icon-light flex-shrink-0 mr-3')
+            p.mb-0 Push-up jeans have been added to your cart. <br class="d-inline-block d-lg-none"><a href="cart.html" class="text-reset text-decoration-underline ml-lg-3">View Cart</a>
+
+        button.close.close-absolute.close-centered.opacity-10.text-inherit(type='button', data-dismiss='alert', aria-label='Close')
+            +svgIcon('close-1','w-2rem h-2rem')

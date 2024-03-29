@@ -1,0 +1,77 @@
+// Sidebar
+div(class="sidebar col-xl-3 col-lg-4 " + sidebarClass)
+    .sidebar-block.px-3.px-lg-0(class=sidebarBlockClass)
+        a.d-lg-none.block-toggler(data-toggle="collapse", href="#categoriesMenu", aria-expanded="false", aria-controls="categoriesMenu") Product Categories
+            span.block-toggler-icon
+
+        - var noOfCategories = 3
+        include inc-sidebar-categories.pug
+            
+    .sidebar-block.px-3.px-lg-0(class=sidebarBlockClass)
+
+        a.d-lg-none.block-toggler(data-toggle="collapse", href="#priceFilterMenu", aria-expanded="false", aria-controls="priceFilterMenu") Filter by price
+            span.block-toggler-icon
+
+        #priceFilterMenu.expand-lg.collapse
+            h5.sidebar-heading.d-none.d-lg-block Price  
+            
+            #slider-snap.mt-4.mt-lg-0 
+            .nouislider-values
+                .min From $
+                    span#slider-snap-value-lower
+                .max To $
+                    span#slider-snap-value-upper
+
+                input.slider-snap-input(type="hidden", name="pricefrom", id="slider-snap-input-lower", value="40")
+                input.slider-snap-input(type="hidden", name="priceto",  id="slider-snap-input-upper", value="110")                    
+    
+    .sidebar-block.px-3.px-lg-0(class=sidebarBlockClass)
+        a.d-lg-none.block-toggler(data-toggle="collapse", href="#brandFilterMenu", aria-expanded="true", aria-controls="brandFilterMenu") Filter by brand
+            span.block-toggler-icon
+
+        // Brand filter menu - this menu has .show class, so is expanded by default
+        #brandFilterMenu.expand-lg.collapse.show
+
+            h5.sidebar-heading.d-none.d-lg-block Brands 
+
+            form(action="#").mt-4.mt-lg-0 
+                - var brands = []
+                - brands.push({name: 'Calvin Klein', count: 18, checked: true})
+                - brands.push({name: 'Levi Strauss', count: 30, checked: true})
+                - brands.push({name: 'Hugo Boss', count: 120})
+                - brands.push({name: 'Tomi Hilfiger', count: 70})
+                - brands.push({name: 'Tom Ford ', count: 110})
+                
+                each val, index in brands
+                    .form-group.mb-1
+                        .custom-control.custom-checkbox
+                            if val.checked
+                                input.custom-control-input(id=`brand${index}`, type="checkbox", name="clothes-brand", checked)
+                            else
+                                input.custom-control-input(id=`brand${index}`, type="checkbox", name="clothes-brand")
+                            label.custom-control-label(for=`brand${index}`) #{val.name} 
+                                small (#{val.count})
+    
+    .sidebar-block.px-3.px-lg-0(class=sidebarBlockClass) 
+
+        include inc-sidebar-sizes.pug
+
+    .sidebar-block.px-3.px-lg-0(class=sidebarBlockClass)
+
+        a.d-lg-none.block-toggler(data-toggle="collapse", href="#colourFilterMenu", aria-expanded="false", aria-controls="colourFilterMenu") Filter by colour
+            span.block-toggler-icon
+
+        // Size filter menu
+        #colourFilterMenu.expand-lg.collapse
+
+            h5.sidebar-heading.d-none.d-lg-block Colour 
+            
+            - var coloursMultiple = true
+            - var coloursRequired = false
+            - var coloursSidebar = true
+            
+            .mt-4.mt-lg-0 
+                include inc-component-colours.pug
+            
+            
+// /Sidebar end

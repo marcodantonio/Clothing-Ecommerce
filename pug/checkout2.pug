@@ -1,0 +1,57 @@
+extends _pug-includes/layout.pug
+
+block content
+
+    - var breadcrumbs = []
+    - breadcrumbs.push({name: 'Home', link: 'index.html'})
+    - breadcrumbs.push({name: 'Checkout'})
+    - var heroHeading = 'Checkout'
+    - var heroText ='<p class="lead text-muted">Choose your delivery method.</p>'
+    
+    include _pug-includes/inc-hero.pug
+    
+    // Checkout
+    section
+        .container
+            .row
+                .col-lg-8
+
+                    - var step = 1
+                    include _pug-includes/inc-checkout-nav.pug
+                    
+                    
+                    .row
+                        - var options = []
+                        - options.push({name: 'Usps next day', description: dummyText[0]})
+                        - options.push({name: 'Usps next day', description: 'Get it right on next day - fastest option possible.'})
+                        - options.push({name: 'Usps next day', description: 'Get it right on next day - fastest option possible.'})
+                        - options.push({name: 'Usps next day', description: 'Get it right on next day - fastest option possible.'})
+
+                        each val, index in options
+                            .col-md-6
+                                .card-radio.mb-4
+                                    label.card-label(for=`option${index}`)
+                                    if (index == 0)
+                                        input(type="radio", name="shippping", id=`option${index}`,class="card-radio-input", checked)
+                                    else
+                                        input(type="radio", name="shippping", id=`option${index}`,class="card-radio-input")
+                                    .card    
+                                        .card-header
+                                            h6.mb-0 #{val.name}
+                                        .card-body
+                                            p.text-muted.text-sm #{val.description}
+                            
+                            
+                    .my-5.d-flex.justify-content-between.flex-column.flex-lg-row
+                        a.btn.btn-link.text-muted(href="cart.html") 
+                            i.fa.fa-angle-left.mr-2
+                            | Back to the addresses
+                        a.btn.btn-dark(href="checkout3.html")
+                            | Choose payment method
+                            i.fa.fa-angle-right.ml-2
+                                        
+                                        
+                
+                .col-lg-4
+                    include _pug-includes/inc-checkout-summary-card.pug
+                        

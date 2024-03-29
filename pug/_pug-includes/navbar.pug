@@ -1,0 +1,119 @@
+if (!navbarClass)
+    - var navbarClass = 'navbar-light bg-white px-lg-5'
+if (!headerClass)
+    - var headerClass = 'header'
+
+- homeLinks = {'index.html': 'Home 1 - Fashion', 'index-2.html': 'Home 2 - Fashion', 'index-3.html': 'Home 3 - Design <span class="badge badge-primary-light ml-1">New</span>', 'index-4.html': 'Home 4 - Design <span class="badge badge-primary-light ml-1">New</span>'}
+- shopLinks = {'category-full.html': 'Full width',  'category-full-sidebar.html': 'Full width with category menu',  'category-big-products.html': 'Full width with big products',  'category-boxed.html': 'Fixed width', 'category-sidebar.html': 'Fixed width & sidebar',  'category-masonry.html' : 'Fixed width & masonry layout<span class="badge badge-primary-light ml-1">New</span>',  'category-categories.html' : 'Subcategories'}        
+- detailLinks = {'detail-1.html': 'Product with sticky info', 'detail-2.html': 'Product with background', 'detail-3.html': 'Product standard '}        
+- pagesLinks = {'about.html': 'About - Company <span class="badge badge-primary-light ml-1">New</span>', 'about-2.html': 'About v.2 - Person <span class="badge badge-primary-light ml-1">New</span>','faq.html': 'F.A.Q. <span class="badge badge-primary-light ml-1">New</span>', 'contact.html': 'Contact', 'privacy.html': 'Privacy policy <span class="badge badge-primary-light ml-1">New</span>'} 
+- orderLinks = {'cart.html': 'Shopping cart', 'checkout1.html': 'Checkout - Five steps <span class="badge badge-primary-light ml-1">New</span>', 'checkout.html': 'Checkout - Single-page', 'checkout-confirmed.html': 'Checkout - confirmed', 'wishlist.html' : 'Wishlist'}
+- customerLinks = {'customer-login.html': 'Login/sign up<span class="badge badge-primary-light ml-1">New</span>', 'customer-orders.html': 'Orders <span class="badge badge-primary-light ml-1">New</span>', 'customer-order.html' : 'Order detail <span class="badge badge-primary-light ml-1">New</span>' , 'customer-order-tracking.html': 'Order tracking <span class="badge badge-primary-light ml-1">New</span>',  'customer-addresses.html' : 'Addresses <span class="badge badge-primary-light ml-1">New</span>' , 'customer-account.html' : 'Profile <span class="badge badge-primary-light ml-1">New</span>' , 'customer-wishlist.html' : 'Wishlist <span class="badge badge-primary-light ml-1">New</span>'}   
+- docLinks = {'docs/index.html': 'Introduction', 'docs/directory-structure.html': 'Directory structure', 'docs/gulp.html': 'Gulp', 'docs/customizing-css.html': 'Customizing CSS', 'docs/credits.html': 'Credits', 'docs/changelog.html': 'Changelog'}
+- componentLinks = {'docs/components-bootstrap.html': 'Bootstrap', 'docs/components-theme.html': 'Theme'}     
+
+// navbar
+header(class=headerClass) 
+    if (!hideTopbar)
+        include inc-topbar.pug
+
+    nav(class="navbar navbar-expand-lg " + navbarClass)
+        a.navbar-brand(href='index.html') Varkala
+        ul.list-inline.mb-0.d-block.d-lg-none
+            li.list-inline-item.mr-3
+                a(href="#", data-toggle="modal", data-target="#loginModal").text-dark.text-hover-primary
+                    +svgIcon('avatar-1','navbar-icon')   
+            li.list-inline-item.mr-3
+                a(href=path + "wishlist.html").text-dark.text-hover-primary.position-relative
+                    +svgIcon('heart-1','navbar-icon')   
+                    .navbar-icon-badge 3
+            li.list-inline-item.position-relative.mr-3
+                a(href="#", data-toggle="modal", data-target="#sidebarCart").text-dark.text-hover-primary
+                    +svgIcon('retail-bag-1','navbar-icon')   
+                    .navbar-icon-badge 5
+                    
+        button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarContent', aria-controls='navbarContent', aria-expanded='false', aria-label='Toggle navigation')
+            +svgIcon('menu-hamburger-1','navbar-icon') 
+        
+        #navbarContent.collapse.navbar-collapse
+            ul.navbar-nav.mt-3.mt-lg-0
+                - activeClass = ''
+                if (active && active == 'home')
+                    - activeClass = 'active'
+                li.nav-item.dropdown(class=activeClass)
+                    a#homeDropdown.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                        | Home
+                    .dropdown-menu(aria-labelledby='homeDropdown')
+                        +dropdownList('', homeLinks, '')
+
+                - activeClass = ''
+                if (active && (active == 'category' || active == 'detail'))
+                    - activeClass = 'active'
+
+                li.nav-item.dropdown(class=activeClass)
+                    a#shopDropdown.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                        | Shop
+                    .dropdown-menu.py-0(aria-labelledby='shopDropdown', data-min-width="750px", data-translate-x="-50px")
+                        .row
+                            .col-lg-4.col-sm-6.p-lg-5
+                                +dropdownList('Shop pages', shopLinks, 'pl-lg-0')           
+                            .col-lg-4.col-sm-6.p-lg-5
+                                +dropdownList('Product pages', detailLinks, 'pl-lg-0')           
+                            .col-lg-4.d-none.d-lg-block
+                                img.bg-image(src=path + "img/product/kyle-loftus-596319-unsplash-cropped.jpg", alt="")
+
+                li.nav-item.dropdown
+                    a#iconsDropdown.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                        | Icons
+                    .dropdown-menu.py-lg-0(aria-labelledby='iconsDropdown', data-min-width="750px")
+
+                        include inc-var-categoryicons.pug
+
+                        .row.py-lg-5.px-4
+                            each val, index in categoryIcons
+                                - margin = 'mb-2 mb-lg-0'
+                                if (index < 6)
+                                    - margin = 'mb-2 mb-lg-5'
+                                .col-6.col-sm-3.col-md-2.text-center(class=margin)
+                                    a.text-reset(href="category-categories.html")
+                                        +svgIcon(val.icon ,'w-3rem h-3rem mb-2 svg-icon-light')   
+                                        h6 #{val.name}
+                        .p-3.bg-primary.text-center.text-sm.d-none.d-lg-block
+                            p.mb-0 Don't miss our biggest sales this year. Use the code "SUMMER35" at checkout until Jun. 15! 
+
+
+                include inc-megamenu.pug
+
+                - activeClass = ''
+                if (active && active == 'docs')
+                    - activeClass = 'active'
+                li.nav-item.dropdown(class=activeClass)
+                    a#docsDropdown.nav-link.dropdown-toggle(href='#', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                        | Docs
+                    .dropdown-menu(aria-labelledby='homeDropdown')
+                        +dropdownList('', docLinks, '')     
+                        .dropdown-divider
+                        +dropdownList('', componentLinks, '')
+
+            form.d-lg-flex.ml-auto.mr-lg-5.mr-xl-6.my-4.my-lg-0(action="#")
+                .input-group.input-group-underlined
+                    input.form-control.form-control-underlined.pl-3(type='text', placeholder='Search', aria-label='Search', aria-describedby='button-search')
+                    .input-group-append.ml-0
+                        button#button-search.btn.btn-underlined.py-0(type='button') 
+                            +svgIcon('search-1','navbar-icon')   
+
+            ul.list-inline.mb-0.d-none.d-lg-block
+                li.list-inline-item.mr-3
+                    a(href="#", data-toggle="modal", data-target="#loginModal").text-dark.text-hover-primary
+                        +svgIcon('avatar-1','navbar-icon')   
+                li.list-inline-item.mr-3
+                    a(href=path + "wishlist.html").text-dark.text-hover-primary.position-relative
+                        +svgIcon('heart-1','navbar-icon')   
+                        .navbar-icon-badge 3
+                li.list-inline-item.position-relative.mr-3
+                    a(href="#", data-toggle="modal", data-target="#sidebarCart").text-dark.text-hover-primary
+                        +svgIcon('retail-bag-1','navbar-icon')   
+                        .navbar-icon-badge 5
+                li.list-inline-item
+                    a(href="#", data-toggle="modal", data-target="#sidebarRight").text-dark.text-hover-primary
+                        +svgIcon('menu-hamburger-1','navbar-icon') 

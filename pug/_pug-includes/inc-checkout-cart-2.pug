@@ -1,0 +1,45 @@
+.cart.mb-5
+    
+    include inc-var-basketitems.pug
+
+    .cart-body
+        each val in basketProducts
+            // Product
+            .cart-item
+                .row.d-flex.align-items-center.text-left.text-md-center
+                    .col-12.col-md-5
+                        a(href="#").cart-remove.close.mt-3.d-md-none
+                            i.fa.fa-times                                                                                    
+                        .d-flex.align-items-center
+                            a(href="detail-1.html")
+                                img.cart-item-img(src=path + val.image, alt="...")
+                            .cart-title.text-left
+                                a.text-dark.link-animated(href="detail-1.html")
+                                    strong #{val.name}
+                                br
+                                span.text-muted.text-sm Size: #{val.size}
+                                if (val.color)
+                                    br
+                                    span.text-muted.text-sm Colour: #{val.color}
+                    .col-12.col-md-7.mt-4.mt-md-0
+                        .row.align-items-center
+                            .col-md-3
+                                .row
+                                    .col-6.d-md-none.text-muted Price per item
+                                    .col-6.col-md-12.text-right.text-md-center #{val.itemPrice}
+                            .col-md-4
+                                .row.align-items-center
+                                    .d-md-none.col-7.col-sm-9.text-muted Quantity
+                                    .col-5.col-sm-3.col-md-12
+                                        .d-flex.align-items-center
+                                            .btn.btn-items.btn-items-decrease -
+                                            input(type="text", value=val.items, class="form-control text-center border-0 border-md input-items")
+                                            .btn.btn-items.btn-items-increase +
+                            .col-md-3 
+                                .row
+                                    .col-6.d-md-none.text-muted Total price 
+                                    .col-6.col-md-12.text-right.text-md-center #{val.totalPrice}
+                            
+                            .col-2.d-none.d-md-block.text-center
+                                a(href="#").cart-remove.text-muted 
+                                    +svgIcon('close-1','w-2rem h-2rem svg-icon-light')

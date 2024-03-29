@@ -1,0 +1,128 @@
+extends _pug-includes/layout.pug
+
+block vars
+    - var countdown = true
+    - var navbarClass = 'bg-transparent border-0 shadow-0 navbar-light px-lg-5 '  
+      
+    - var active = 'home'      
+
+block content
+
+    - slider = []
+    - slider.push({title: 'Black & White',image: 'img/product/chair2-transparent.png', containerClass: 'align-items-center', subtitle: 'Our all-time favourites', subtitleClass: 'text-dark font-weight-light', text: dummyText[1].substr(0,100), button: 'Discover more', columnClass: 'col-lg-6', slideClass: 'bg-cover-left', blobColor: '#ffdddd'})    
+    - slider.push({title: 'Design clocks on sale',image: 'img/product/clock-transparent.png', containerClass: 'align-items-center', subtitle: 'Time is almost up', subtitleClass: 'text-dark font-weight-light', headingClass:'mb-5', button: 'Start shopping', columnClass: 'col-lg-6', slideClass: '', blobColor: '#e7eaf9'})        
+    - slider.push({title: 'Boxxez',image: 'img/product/box-transparent.png', containerClass: 'align-items-center', subtitle: 'Our all-time favourites', subtitleClass: 'text-dark font-weight-light', text: dummyText[1].substr(0,100), button: 'Discover more', columnClass: 'col-lg-6', slideClass: 'bg-cover-right', blobColor: '#f5e6a8'})
+
+    
+    +svgBlob('blob-shape', 'svg-blob-fill-current', ' width: 800px; height: 800px; max-width: 100%; left: -200px; top: -200px; color: #e0d4ab;')
+
+    // Slider main container
+    .swiper-container.home-slider-design(style="height: 50vh; min-height: 500px;")
+        // Additional required wrapper
+        .swiper-wrapper
+            // Slides
+            each val, index in slider
+                .swiper-slide(class=val.slideClass)
+                    .container.h-100
+                        .row.h-100(class=val.containerClass)
+                            .col-sm-6.pt-5.pt-md-0(data-swiper-parallax="-500")
+                                if (val.subtitle)
+                                    p.subtitle.letter-spacing-3.mb-3(class=val.subtitleClass) #{val.subtitle}
+                                h2.display-3(class=val.headingClass, style="line-height: 1") #{val.title}
+                                if (val.text)
+                                    p.text-muted.mb-5 #{val.text}
+                                if (val.button)
+                                    a.btn.btn-outline-primary(href="#") #{val.button}
+                            .col-sm-6.text-left.text-sm-center
+                                img.img-fluid.home-slider-image(src=val.image, alt="", data-swiper-parallax="-200")
+                                +svgBlob('blob-shape-3', 'd-none d-md-inline-block svg-blob-fill-current svg-blob-swiper', 'color: '+val.blobColor)
+                    
+
+        .swiper-pagination
+        .swiper-nav.d-none.d-lg-block
+            .swiper-button-prev#homePrev
+            .swiper-button-next#homeNext    
+
+
+    - var banners = []
+    - banners.push({title: 'Chairs', subtitle: 'Wood & Metal', link: '#', image: 'img/product/category-chair2.jpg', class: 'col-6 col-lg-7', colour: '#3b5d59', bgColour: '#c3e3e0'})
+    - banners.push({title: 'Accessories', subtitle: 'The little things', link: '#', image: 'img/product/category-boxes.jpg', class: 'col-6 col-lg-5', colour: '#6d5900', bgColour: '#f8f0cc'})
+    - banners.push({title: 'Books', subtitle: 'Something about books', link: '#', image: 'img/product/category-books.jpg', class: 'col-6 col-lg-5', colour: '#7d514f', bgColour: '#ffd4d2'})
+    - banners.push({title: 'Clocks', subtitle: 'Tik tak', link: '#', image: 'img/product/category-clocks.jpg', class: 'col-6  col-lg-7', colour: '#46619a', bgColour: '#cddeff'})
+
+    .container.py-6
+        .row
+            each val, index in banners
+
+                - var additionalClass = 'pr-1'
+                if (index % 2 == 1)
+                    - additionalClass = 'pl-1'
+
+                .mb-2(class=val.class + ' ' + additionalClass)
+                    .banner(style=`background-color:${val.bgColour}`, data-aos="zoom-in")
+                        .banner-text.p-3.p-lg-5
+                            p.subtitle.text-sm(style=`color: ${val.colour}`) #{val.subtitle}
+                            h2.mb-0 #{val.title}      
+                        .banner-bg
+                            img.img-fluid(src=val.image, alt="")
+                        a.stretched-link.banner-link(href=val.link)
+                            span.sr-only See #{val.title}
+
+   
+    .position-relative.py-6.overflow-hidden(style="background-color: #fdf7e5;",data-aos="flip-up")
+        +svgBlob('blob-shape-4', 'svg-blob-fill-current', 'right: 0; top: 0; color: #ded3ae;')        
+        .container
+                img.position-absolute.d-none.d-sm-block(style="right: 5%;top: 0; max-width: 500px; z-index: 5;", src="img/product/lamps-transparent.png", alt="")
+                .position-relative.z-index-10
+                    p.subtitle.mb-3(style="color: #846707;") Widest choice 
+                    h4.h1.mb-3 Lights on sale
+                    h5.h2.font-weight-light.mb-5 Our biggest sales this year &mdash; up to 60% off!
+                    a.btn.btn-outline-dark(href="#") Start shopping
+
+    .position-relative.py-6
+        +svgBlob('blob-shape-2', 'svg-blob-fill-current d-none d-md-block', 'left: -200px; top: 400px; color: #ffdbd9;')    
+        +svgBlob('blob-shape-3', 'svg-blob-fill-current d-none d-md-block', 'right: -200px; top: 600px; color: #e7eaf9;')    
+        .container
+            h2.display-2.font-weight-bold.mb-5(style="color: #efb2af") New Arrivals
+            .row.justify-content-between.align-items-center.mb-4
+                .col-12.col-md
+                    ul.list-inline.mb-3.mb-md-0  
+                        li.list-inline-item
+                            a.text-dark(href="#") All Products 
+                        li.list-inline-item
+                            a.text-muted.text-hover-dark(href="#") Chairs 
+                        li.list-inline-item
+                            a.text-muted.text-hover-dark(href="#") Books
+                        li.list-inline-item
+                            a.text-muted.text-hover-dark(href="#") Clothes
+                        li.list-inline-item
+                            a.text-muted.text-hover-dark(href="#") Accessories
+                .col-12.col-md-auto
+                    a.btn.btn-link.px-0(href="#") All products
+
+            include _pug-includes/inc-var-designitems.pug
+            - var additionalButtons = true 
+            - var itemClass = 'col-xl-3 col-md-4 col-6'
+            - var dontSwapImage = true
+            - var masonry = true           
+            - var itemClass = 'item col-xl-3 col-lg-4 col-6' 
+
+            .masonry-wrapper.mx-n3
+                .row
+                    each val, index in designItems
+                        if (index < 12)
+                            +product(val, itemClass, additionalButtons, doNotDisplayView, dontSwapImage, masonry)    
+
+            include _pug-includes/inc-modal.pug
+
+
+    .text-center(style="margin-top: -150px;", data-aos="flip-up")
+        img.img-fluid.z-index-10(src="img/product/chair-transparent-shadow.png", alt="", style="position: relative; max-width: 350px; top: 150px;margin-left: auto; margin-right: auto;")
+        .position-relative(style="background: #ebf7ff; ")
+            +svgBlob('blob-shape-4', 'svg-blob-fill-current', ' width: 400px; height: 400px; max-width: 100%; left: -200px; color: #c4e0f3;')    
+            +svgBlob('blob-shape-2', 'svg-blob-fill-current', ' width: 300px; height: 300px; top:0; right: -200px; color: #c4e0f3;')    
+            .container.py-6    
+                .position-relative.z-index-10
+                    h4.display-3.font-weight-bold.mt-5.mb-3 #summer #sales
+                    h5.h2.font-weight-light.mb-5 Our biggest sales this year &mdash; up to 60% off!
+                    a.btn.btn-outline-dark(href="#") Start shopping

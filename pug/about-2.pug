@@ -1,0 +1,32 @@
+extends _pug-includes/layout.pug
+
+block vars
+    - var active = 'about'  
+
+block content
+    section
+        .container-fluid
+            .row.my-lg-3
+                .col-lg-7.col-xl-6.order-lg-2.mb-3.mb-lg-0
+                    .d-flex.align-items-center.p-5.p-xl-6.bg-gray-100.h-100
+                        div
+                            h6.text-uppercase.text-primary.letter-spacing-5.mb-3  About me
+                            h1.display-3.font-weight-bold.mb-5 Frankie Kafka
+                            .row
+                                .col-xl-6
+                                    p.text-lg.text-muted.mb-lg-0 #{dummyText[0].substr(0, 150)}
+                                .col-xl-6
+                                    p.text-lg.text-muted.mb-0 #{dummyText[1].substr(0, 150)}
+                            hr.my-5
+                            .row
+                                .col-xl-6
+                                    h6.text-uppercase.text-primary.letter-spacing-3.mb-4 Get in touch
+                                    p.text-muted.mb-5.mb-xl-0 123 Firebrigade St<br>San Antonio, CA<br>U.S.A.
+                                .col-xl-6
+                                    h6.text-uppercase.text-primary.letter-spacing-3.mb-4 Company details
+                                    p.text-muted.mb-0 Reg.Id: 15456456<br>VAT Id: 646643463546
+                .col-lg-5.col-xl-6.pr-lg-0.order-lg-1
+                    .dark-overlay.mh-full-screen-with-header.h-100
+                        img.bg-image(src=path + "img/photo/raoul-ortega-2JtF6pYAOOI-unsplash.jpg", alt="")
+
+    

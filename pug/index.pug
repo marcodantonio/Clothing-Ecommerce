@@ -1,0 +1,141 @@
+extends _pug-includes/layout.pug
+
+block vars
+    - var countdown = true
+    - var navbarClass = 'bg-transparent border-0 shadow-0 navbar-light px-lg-5 '  
+    - var headerClass = 'header header-absolute'       
+    - var topbarClass = 'bg-transparent' 
+    - var active = 'home'      
+
+block content
+    
+    - slider = []
+    - slider.push({title: 'Blouses & Tops', headingClass: 'mb-3', image: 'img/photo/home-1-plain.jpg', containerClass: 'align-items-center', subtitle: 'Our all-time favourites', subtitleClass: 'text-dark font-weight-light', text: dummyText[1].substr(0,100), button: 'Discover more', columnClass: 'col-lg-6', slideClass: 'bg-cover-right'})
+    - slider.push({title: 'Linen and denim', headingClass: 'mb-3', image: 'img/photo/home-2-plain.jpg', containerClass: 'justify-content-center align-items-center text-center', subtitle: 'Blue & White', subtitleClass: 'text-dark font-weight-light', button: 'Start shopping', columnClass: 'col-lg-6', slideClass: ''})    
+    - slider.push({title: 'For every occassion', headingClass: 'mb-5', image: 'img/photo/home-3-plain.jpg', containerClass: 'align-items-center', subtitle: 'Sneakers', subtitleClass: 'text-primary font-weight-light mb-4', button: 'Start shopping', columnClass: 'col-lg-6 offset-lg-6', slideClass: ''})    
+    
+
+    // Slider main container
+    .swiper-container.home-slider(style="height: 95vh; min-height: 600px;")
+        // Additional required wrapper
+        .swiper-wrapper
+            // Slides
+            each val, index in slider
+                .swiper-slide.bg-cover(style=`background-image: url('${val.image}');`, class=val.slideClass)
+                    .container-fluid.px-lg-6.px-xl-7.h-100
+                        .row.h-100(class=val.containerClass, data-swiper-parallax="-500")
+                            div(class=val.columnClass)
+                                if (val.subtitle)
+                                    p.subtitle.letter-spacing-3.mb-3(class=val.subtitleClass) #{val.subtitle}
+                                h2.display-1(class=val.headingClass, style="line-height: 1") #{val.title}
+                                if (val.text)
+                                    p.text-muted.mb-5 #{val.text}
+                                if (val.button)
+                                    a.btn.btn-dark(href="#") #{val.button}
+        .swiper-pagination
+        .swiper-nav.d-none.d-lg-block
+            .swiper-button-prev#homePrev
+            .swiper-button-next#homeNext
+
+    // Categories big
+    .bg-gray-100.position-relative
+        .container.py-6
+
+            //- h1.mb-5-4.font-weight-bold.text-gray-500(style="position: absolute; top: 80%; left: 50px; transform: rotate(-90deg); transform-origin: top left;") Fresh collection
+
+            .row
+
+                - categoryItemsGender = []
+                - categoryItemsGender.push({name: 'Women', imgCropped : 'img/product/category-women.jpg', img: '', alt: 'product', count: '1,520', link: 'category-full.html'})
+                - categoryItemsGender.push({name: 'Men', imgCropped : 'img/product/category-men.jpg', img: '', alt: 'product', count: '1,112', link: 'category-full.html'})
+
+
+                each val, index in categoryItemsGender
+                    if index < 2
+                        - categoryClass = 'col-sm-6 mb-5 mb-sm-0'
+
+                        //- +categoryCard(val, categoryClass, true, 0)        
+
+                        .col-sm-6.mb-5.mb-sm-0
+                            .card.card-scale.shadow-0.border-0.text-white.text-hover-gray-900.overlay-hover-light.text-center
+                                    img.card-img.img-scale(src=val.imgCropped, alt='Card image')
+                                    .card-img-overlay.d-flex.align-items-center  
+                                        .w-100.py-3
+                                            h2.display-3.font-weight-bold.mb-0 #{val.name}
+                                            a.stretched-link(href=val.link)
+                                                span.sr-only See #{val.title}
+
+
+    .container-fluid.container-fluid-px.py-6
+        .row
+            .col-lg-10.col-xl-8.text-center.mx-auto
+                h2.display-3.mb-5 New Arrivals
+                p.lead.text-muted.mb-6 #{dummyText[0]}
+
+        .row.justify-content-between.align-items-center.mb-4
+            .col-12.col-sm
+                ul.list-inline.text-center.text-sm-left.mb-3.mb-sm-0  
+                    li.list-inline-item
+                        a.text-dark(href="#") All Products 
+                    li.list-inline-item
+                        a.text-muted.text-hover-dark(href="#") Clothing 
+                    li.list-inline-item
+                        a.text-muted.text-hover-dark(href="#") Bags
+                    li.list-inline-item
+                        a.text-muted.text-hover-dark(href="#") Shoes
+                    li.list-inline-item
+                        a.text-muted.text-hover-dark(href="#") Accessories
+            .col-12.col-sm-auto.text-center
+                a.btn.btn-link.px-0(href="#") All products
+
+        include _pug-includes/inc-var-shopitems.pug
+        - var additionalButtons = true
+        - var itemClass = 'col-xl-2 col-lg-3 col-md-4 col-6'
+
+        .row
+            each val, index in shopItems
+                if (index < 12)
+                    +product(val, itemClass, additionalButtons, doNotDisplayView)     
+
+        include _pug-includes/inc-modal.pug
+
+    include _pug-includes/inc-var-categoryitems.pug
+
+    .py-6.bg-cover.bg-cover-right(style="background-image: url(img/photo/deal-plain.jpg);")
+        .container
+            .row
+                .col-lg-10.col-xl-6
+                    p.subtitle.mb-3.text-danger Deal of the week
+                    h3.h1 Oversized denim jacket
+                    p.text-muted
+                        del.mr-3 $129.00
+                        span $79.00
+                    p.mb-4
+                        span.badge.badge-danger.p-3 $50 off
+                    .bg-white.px-5.py-4.shadow.mb-4#countdown
+                        .row.justify-content-between
+                            .col-6.col-sm-3.text-center.mb-4.mb-sm-0
+                                h6.h4.mb-2.days &nbsp;
+                                span.text-muted days
+                            .col-6.col-sm-3.text-center.mb-4.mb-sm-0
+                                h6.h4.mb-2.hours &nbsp;
+                                span.text-muted hours
+                            .col-6.col-sm-3.text-center
+                                h6.h4.mb-2.minutes &nbsp;
+                                span.text-muted minutes
+                            .col-6.col-sm-3.text-center
+                                h6.h4.mb-2.seconds &nbsp;
+                                span.text-muted seconds
+                
+                    p
+                        a.btn.btn-outline-dark(href="#") Shop now
+
+    .container.py-6
+        h5.text-uppercase.text-primary.letter-spacing-3.mb-3 Our History
+        p.lead.text-muted.mb-4 #{dummyText[5]} 
+        p.lead.text-muted.mb-5 #{dummyText[4]}     
+
+    // Brands Section
+    section.pb-6
+        .container
+            include _pug-includes/inc-brands.pug

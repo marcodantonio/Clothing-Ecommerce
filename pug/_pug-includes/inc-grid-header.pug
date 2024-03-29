@@ -1,0 +1,25 @@
+header.product-grid-header
+    .mr-3.mb-3 
+        | Showing 
+        strong 1-12 
+        | of 
+        strong 158 
+        | products
+    
+    .mr-3.mb-3
+        span.mr-2 Show
+        - var show = []
+        - show.push({count: 12, activeClass: 'active'})
+        - show.push({count: 24, activeClass: ''})
+        - show.push({count: 'All', activeClass: ''})
+
+        each val in show
+            a(href="#", class=`product-grid-header-show ${val.activeClass}`) #{val.count}    
+        
+
+    .mb-3.d-flex.align-items-center
+        span.d-inline-block.mr-2 Sort by
+        select.selectpicker(name="sort", id="form_sort", data-style="btn-selectpicker border-0", title="")
+                    - var sortBy = ['Default', 'Popularity', 'Rating', 'Newest first']
+                    each val, index in sortBy
+                        option(value=`sortBy_${index}`) #{val}     

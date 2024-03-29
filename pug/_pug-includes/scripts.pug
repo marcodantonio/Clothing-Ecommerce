@@ -1,0 +1,130 @@
+// JavaScript files
+
+script.
+    // ------------------------------------------------------- //
+    //   Inject SVG Sprite - 
+    //   see more here 
+    //   https://css-tricks.com/ajaxing-svg-sprite/
+    // ------------------------------------------------------ //
+    function injectSvgSprite(path) {
+
+        var ajax = new XMLHttpRequest();
+        ajax.open("GET", path, true);
+        ajax.send();
+        ajax.onload = function(e) {
+        var div = document.createElement("div");
+        div.className = 'd-none';
+        div.innerHTML = ajax.responseText;
+        document.body.insertBefore(div, document.body.childNodes[0]);
+        }
+    }
+    // this is set to Bootstrapious website as you cannot 
+    // inject local SVG sprite (using only 'icons/orion-svg-sprite.svg' path)
+    // while using file:// protocol
+    // pls don't forget to change to your domain :)
+    injectSvgSprite('https://demo.bootstrapious.com/varkala/1-1/icons/orion-svg-sprite.svg'); 
+    injectSvgSprite('https://demo.bootstrapious.com/varkala/1-1/icons/varkala-clothes.svg'); 
+    injectSvgSprite('https://demo.bootstrapious.com/varkala/1-1/img/shape/blob-sprite.svg'); 
+
+// jQuery
+script(src=path + 'vendor/jquery/jquery.min.js')
+// Bootstrap Bundle 
+script(src=path + 'vendor/bootstrap/js/bootstrap.bundle.min.js')
+// Swiper Carousel                       
+script(src=path + 'vendor/swiper/js/swiper.min.js')
+// Bootstrap Select
+script(src=path + 'vendor/bootstrap-select/js/bootstrap-select.min.js')
+// AOS - AnimationOnScroll
+script(src=path + 'vendor/aos/aos.js')
+// Custom Scrollbar
+script(src=path + 'vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js')
+script(src=path + 'js/custom-scrollbar-init.js')
+// Smooth scroll
+script(src=path + 'vendor/smooth-scroll/smooth-scroll.polyfills.min.js')
+// Object Fit Images - Fallback for browsers that don't support object-fit
+script(src=path + 'vendor/object-fit-images/ofi.min.js')
+
+if (masonry)
+    // Masonry layout scripts
+    script(src=path + 'vendor/masonry-layout/masonry.pkgd.min.js')
+    script(src=path + 'vendor/imagesloaded/imagesloaded.pkgd.min.js')
+    script(src=path + 'js/masonry-init.js')
+    
+if (photoSwipe)
+    // PhotoSwiper gallery
+    script(src=path + 'vendor/photoswipe/photoswipe.min.js')
+    script(src=path + 'vendor/photoswipe/photoswipe-ui-default.min.js')
+    script(src=path + 'js/photoswipe-init.js')
+
+if (parallax)
+    // jQuery Parallax - used mostly on the images in Hero section
+    script(src=path + 'vendor/jquery-parallax.js/parallax.min.js')
+
+if (countdown)
+    // JavaScript Countdown
+    script(src=path + 'js/countdown.js')
+    script.
+        var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
+        var countdown = new Countdown('countdown', deadline);
+
+if (imageZoom)
+    // Image Zoom plugin
+    script(src=path + 'vendor/jquery-zoom/jquery.zoom.min.js')
+
+if (map)
+    // Leaflet Map library
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.js') 
+    // Map config
+    script.
+        var mapId = 'map',
+            mapCenter = [53.14, 8.22],
+            mapMarker = true;
+    // Map init
+    script(src=path + 'js/map-init.js')
+
+if (priceSlider)
+    // NoUI Slider (price slider)
+    script(src=path + 'vendor/nouislider/nouislider.min.js')
+    script.
+        var snapSlider = document.getElementById('slider-snap');
+
+        noUiSlider.create(snapSlider, {
+        	start: [ 40, 110 ],
+        	snap: false,
+        	connect: true,
+            step: 1,
+        	range: {
+        		'min': 0,
+        		'max': 250
+        	}
+        });
+        var snapValues = [
+        	document.getElementById('slider-snap-value-lower'),
+        	document.getElementById('slider-snap-value-upper')
+        ];
+        var inputValues = [
+        	document.getElementById('slider-snap-input-lower'),
+        	document.getElementById('slider-snap-input-upper')
+        ];
+        snapSlider.noUiSlider.on('update', function( values, handle ) {
+        	snapValues[handle].innerHTML = values[handle];
+        });        
+
+        snapSlider.noUiSlider.on('change', function( values, handle ) {
+            inputValues[handle].value = values[handle];
+        });        
+
+// Some theme config
+script.
+    var options = {
+        navbarExpandPx: 992
+    }
+    
+// Main Theme files
+script(src=path + 'js/sliders-init.js')
+script(src=path + 'js/theme.js')
+
+if (locals.styleSwitcher)
+    script(src=path + 'vendor/jquery.cookie/jquery.cookie.js') 
+    script(src=path + 'js/demo.js') 
+

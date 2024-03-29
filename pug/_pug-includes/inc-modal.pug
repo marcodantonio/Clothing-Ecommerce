@@ -1,0 +1,41 @@
+// Quickview Modal    
+#quickView.modal.fade.quickview(tabindex='-1', role='dialog', aria-hidden='true')
+    .modal-dialog.modal-xl(role='document')
+        .modal-content
+            button.close.close-absolute.close-rotate(type='button', data-dismiss='modal', aria-label='Close')
+                    +svgIcon('close-1', 'w-3rem h-3rem svg-icon-light align-middle')                
+            .modal-body.quickview-body
+                - var images = []
+                - images.push({image: 'img/product/detail-1-gray.jpg', caption: '', width: '1200', height: '1200'})
+                - images.push({image: 'img/product/detail-2-gray.jpg', caption: '', width: '1200', height: '1200'})
+                - images.push({image: 'img/product/detail-3-gray.jpg', caption: '', width: '1200', height: '1200'})    
+                - images.push({image: 'img/product/detail-4-gray.jpg', caption: '', width: '1200', height: '1200'})    
+                - images.push({image: 'img/product/detail-5-gray.jpg', caption: '', width: '1200', height: '1200'})    
+
+                .row
+                    .col-lg-6
+                        .detail-carousel
+
+                            .product-badge.badge.badge-primary Fresh
+                            .product-badge.badge.badge-dark Sale
+
+                            .swiper-container.quickview-slider#quickViewSlider
+                                // Additional required wrapper
+                                .swiper-wrapper
+                                    // Slides
+                                    each val, index in images
+                                        - var number = index + 1
+                                        .swiper-slide
+                                            img.img-fluid(src=path + val.image, alt=`Modern Jacket ${number}`)
+                            .swiper-thumbs(data-swiper="#quickViewSlider")
+                                each val, index in images
+                                    - activeClass = 0
+                                    if (index === 0) 
+                                        - activeClass = 'active'
+                                    
+                                    button.swiper-thumb-item.detail-thumb-item.mb-3(class=activeClass)
+                                        img.img-fluid(src=path + val.image, alt=`Modern Jacket ${index}`)     
+
+                    .col-lg-6.p-lg-5
+                        - var detailInModal = true
+                        include inc-detail-main.pug

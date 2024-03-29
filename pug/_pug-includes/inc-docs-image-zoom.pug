@@ -1,0 +1,7 @@
+- var images = ['img/product/category-jackets.jpg']
+
+.row
+    .col-md-6
+        each image, index in images
+            div(data-toggle="zoom", data-image=path + image)
+                img.img-fluid(src=path + image, alt='Modern Jacket')

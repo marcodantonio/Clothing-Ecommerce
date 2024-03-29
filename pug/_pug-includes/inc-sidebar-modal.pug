@@ -1,0 +1,44 @@
+// Sidebar Modal Right
+#sidebarRight.modal.fade.modal-right(tabindex='-1', role='dialog', aria-hidden='true')
+    .modal-dialog(role='document')
+        .modal-content
+            .modal-header.border-0
+                button.close.close-rotate(type='button', data-dismiss='modal', aria-label='Close')
+                    +svgIcon('close-1', 'w-3rem h-3rem svg-icon-light align-middle')
+            .modal-body.px-5.pb-5
+                div
+                    h5.mb-5(data-aos="zoom-in", data-aos-delay="50") Varkala
+                    ul.nav.flex-column.mb-5
+                        li.nav-item.active
+                            a.nav-link.pl-0(href='#') Home 
+                        li.nav-item
+                            a.nav-link.pl-0(href='#') Link
+                        li.nav-item
+                            a.nav-link.pl-0.disabled(href='#') Disabled
+                        li.nav-item.dropdown
+                            a#navbarDropdownMenuLink.nav-link.pl-0.dropdown-toggle(href='#', data-target='#sidebarSubmenu', data-toggle='collapse', aria-haspopup='true', aria-expanded='false')
+                                | Dropdown link
+                            .collapse#sidebarSubmenu
+                                ul.nav.flex-column.ml-3
+                                    li.nav-item
+                                        a.nav-link.pl-0(href='#') Action
+                                    li.nav-item
+                                        a.nav-link.pl-0(href='#') Another action
+                                    li.nav-item
+                                        a.nav-link.pl-0(href='#') Something else here                
+                    
+                    ul.list-inline.mb-4
+                        li.list-inline-item.mr-2
+                            i.fab.fa-facebook-f 
+                        li.list-inline-item.mr-2
+                            i.fab.fa-twitter 
+                        li.list-inline-item.mr-2
+                            +svgIcon('calls-1', 'mr-2')
+                            | 020-800-456-747
+
+                    p.text-sm.text-muted.mb-0 #{dummyText[3]}
+
+
+               
+
+        

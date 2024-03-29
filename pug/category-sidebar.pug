@@ -1,0 +1,57 @@
+extends _pug-includes/layout.pug
+
+block vars
+    - var shop = true;
+    - var priceSlider = true;    
+    - var quickViewModal = true;
+
+block content
+
+    - var breadcrumbs = []
+    - breadcrumbs.push({name: 'Home', link: 'index.html'})
+    - breadcrumbs.push({name: 'Shop'})
+    - var heroHeading = 'Jackets and tops'
+    - var heroText = '<p class="lead text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>'
+    
+    .container.py-6
+
+        // Breadcrumbs 
+        ol(class=`breadcrumb ${breadcrumbClass}`)
+            each val in breadcrumbs
+                if (val.link)
+                    li.breadcrumb-item
+                        a(href=val.link) #{val.name}
+                else
+                    li.breadcrumb-item.active #{val.name}   
+
+        // Hero Content
+        .hero-content.mb-6
+            h1(class=heroHeadingClass) #{heroHeading}
+            if heroText
+                .row    
+                    .col-xl-8 !{heroText}                
+        
+        .row
+            - var gridClass = 'col-xl-9 col-lg-8 order-lg-2'
+            - var itemClass = 'col-xl-4 col-6'
+            
+            // Grid 
+            div(class="products-grid " + gridClass)
+
+                include _pug-includes/inc-grid-header.pug
+                        
+                include _pug-includes/inc-var-shopitems.pug
+
+                - var additionalButtons = true
+                if (!doNotDisplayView)
+                    - var doNotDisplayView = false
+
+                .row
+                    each val in shopItems
+                        +product(val, itemClass, additionalButtons, doNotDisplayView)
+
+                include _pug-includes/inc-pagination.pug
+
+            - var sidebarClass = 'pr-xl-5 order-lg-1'
+            - var sidebarBlockClass = ''
+            include _pug-includes/inc-sidebar.pug

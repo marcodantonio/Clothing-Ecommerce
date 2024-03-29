@@ -1,0 +1,88 @@
+extends _pug-includes/layout.pug
+
+block vars
+    - var map = true
+    - var active = 'contact'
+    - var navbarClass = 'bg-transparent border-0 shadow-0 navbar-light px-lg-5 '  
+    - var headerClass = 'header header-absolute'       
+    - var parallax = true
+
+block content
+
+    - var breadcrumbs = []
+    - breadcrumbs.push({name: 'Home', link: 'index.html'})
+    - breadcrumbs.push({name: 'Contact'})
+    - var heroHeading = 'Contact'
+    - var heroImage = path + 'img/photo/contact.jpg'
+    - var heroImageY = 'center'
+    - var heroImage = path + 'img/photo/maarten-deckers-0-frPETzEVs-unsplash.jpg'
+    - var heroOverlayLight = true
+
+    include _pug-includes/inc-hero.pug
+
+    section.py-6
+        .container        
+            .row
+                include _pug-includes/inc-contact-main.pug
+
+    section.bg-gray-200.position-relative.overflow-hidden
+        .container-fluid
+            .row
+                .col-lg-6.px-0
+                    #map(style="height: 100%; min-height: 500px;")
+                .col-lg-6.py-6.px-lg-5.px-xl-6
+                    h2.display-3.font-weight-bold.text-gray-600.mb-5 Our stores
+
+                    - var stores = []
+                    - stores.push({name: 'New York', address: '13/25 New Avenue, New Heaven, 45Y 73J', phone: '564546 54566 54', email: 'email@email.com'})
+                    - stores.push({name: 'London', address: '13/25 New Avenue, New Heaven, 45Y 73J', phone: '564546 54566 54', email: 'email@email.com'})
+                    - stores.push({name: 'Paris', address: '13/25 New Avenue, New Heaven, 45Y 73J', phone: '564546 54566 54', email: 'email@email.com'})
+                    - stores.push({name: 'Tokyo', address: '13/25 New Avenue, New Heaven, 45Y 73J', phone: '564546 54566 54', email: 'email@email.com'})
+
+                    each val, index in stores
+                        - borderClass = 'border-bottom'
+                        if (index == 3)
+                            - borderClass = ''
+
+                        .row.py-4(class=borderClass)
+                            .col-6.col-md-3.font-weight-bold.align-self-center
+                                h4.mb-0 #{val.name}
+                            .col-6.col-md-3.text-sm #{val.address}
+                            .col-6.col-md-3.text-sm #{val.phone}
+                            .col-6.col-md-3.text-sm #{val.email}
+    section.py-6
+        .container
+            .row
+                .col-lg-3
+                    h5.display-2.font-weight-bold.mb-4.mb-lg-5(style="line-height: 1;") Get in touch  
+                    ul.list-inline.h3.mb-6.mb-lg-0
+                        li.list-inline-item.mr-4
+                            a(href="#")
+                                i.fab.fa-facebook-f 
+                        li.list-inline-item.mr-4
+                            a(href="#")
+                                i.fab.fa-twitter                                       
+                        li.list-inline-item.mr-4
+                            a(href="#")
+                                i.fab.fa-instagram                                       
+                .col-lg-8.col-xl-6.ml-auto
+                    
+                    form(id="contact-form", method="post", action="contact.php",class="form")
+                    .row
+                        .col-sm-6
+                            .form-group
+                                label.form-label(for="nameContact") Your firstname *
+                                input(type="text", name="nameContact", id="name", class="form-control form-control-underlined", required="required")
+                        .col-sm-6
+                            .form-group
+                                label.form-label(for="surnameContact") Your lastname *
+                                input(type="text", name="surnameContact", id="surname", class="form-control form-control-underlined", required="required")
+                    .form-group
+                        label.form-label(for="emailContact") Your email *
+                        input(type="email", name="emailContact", id="email", class="form-control form-control-underlined", required="required")
+                    .form-group
+                        label.form-label(for="messageContact") Your message for us *
+                        textarea(rows="4", name="messageContact", id="message", class="form-control form-control-underlined", required="required")
+            
+                    button(type="submit", class="btn btn-outline-primary mt-3") Send message                    
+                       

@@ -1,0 +1,63 @@
+extends ../_pug-includes/layout
+
+block vars
+    - var active = 'docs'  
+    - var path = '../'    
+
+block content
+
+    - var breadcrumbs = []
+    - breadcrumbs.push({name: 'Home', link: '../index.html'})
+    - breadcrumbs.push({name: 'Changelog'})
+    - var heroHeading = 'Changelog'
+    - var current = 'docs/changelog.html'
+    - var heroColumns = 'col-lg-10 col-xl-8 offset-lg-2'
+    
+    include ../_pug-includes/inc-hero-fluid
+
+    .container-fluid
+        .row.px-xl-5
+            .col-lg-2
+                include ../_pug-includes/inc-docs-sidebar
+
+            .col-lg-10.col-xl-8.docs-content
+
+                +componentDocItem('Version 1.2.0', '<p class="text-muted">May 5, 2020</p>')
+                    .card.bg-gray-100.border-0
+                        .card-body.py-4
+                            pre.card-text. 
+                                - <strong>improved:</strong> In addition to HTML files, this theme now comes with Pug file sources, 
+                                    and changes in the Gulp workflow. 
+                                    Pug compilation is now the recommended way of work with this theme. Pug sources 
+                                    use includes and mixins for avoid repetitive code (navbar, footer, cards).
+                                    If you change the navbar, the change will be effective in all your pages, 
+                                    unlike when developing with HTML, where you would need to do all the changes in every file. 
+
+                                    <strong>changes:</strong>
+                                    * <code>pages</code> folder now renamed to <code>html</code>
+                                    * to run previously default `gulp` command, use `gulp dev-html`
+                                    * `gulp build` and `gulp build-html` now compile everything into `build` folder,
+                                        previously `dist`
+                                - <strong>fixed:</strong> Display issues in cart sidebar
+
+                +componentDocItem('Version 1.1.0', '<p class="text-muted">December 12, 2019</p>')
+                    .card.bg-gray-100
+                        .card-body.py-4
+                            pre.card-text. 
+                                - <strong>New pages: </strong> Homepage 3 - Design, Homepage 4 - Design, About, About 2, Multi-step checkout, Category - Masonry layout, 
+                                    Customer pages (Login, Account, Addresses, Orders, Order detail, Order tracking), FAQ, Privacy policy
+                                - <strong>Improved: </strong> - Added more icons to Orion Icons SVG sprite
+                                - <strong>Improved: </strong> - More topics in the components documentation
+                                - <strong>Fixed: </strong> - fixed build task in gulpfile.js
+                                - <strong>Updated: </strong> - Bootstrap (4.4.1 - affects scss/bootstrap and stylesheets), 
+                                    Bootstrap Select (1.13.12 - affects pages/vendor/bootstrap-select), 
+                                    Swiper (5.2.1 pages/vendor/swiper)
+
+                +componentDocItem('Version 1.0.0', '<p class="text-muted">July 25, 2019</p>')
+                    .card.bg-gray-100
+                        .card-body.py-4
+                            pre.card-text. 
+                                - Initial release
+
+
+

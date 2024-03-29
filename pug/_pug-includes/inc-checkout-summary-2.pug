@@ -1,0 +1,68 @@
+h5.mb-5 Order Summary
+
+include inc-var-basketitems.pug
+
+table.table.border-bottom.border-dark.mb-5
+
+    each val in basketProducts
+        tr.text-sm
+            th.py-4.font-weight-normal.text-muted
+                | #{val.name} 
+                span x #{val.items}
+            td.py-4.text-right.text-muted #{val.totalPrice}
+
+    tr
+        th.py-4.text-uppercase.font-weight-normal.text-sm.align-bottom Order Subtotal 
+        td.py-4.text-right.text-muted $390.00
+
+    tr
+        th.py-5.border-dark(colspan="2") 
+            .mb-4 Shipping and handling
+
+            - shipping = ['DHL', 'Branch pickup']
+
+            each val, index in shipping
+                .form-group.mb-1.ml-4
+                    .custom-control.custom-radio
+                        if (index === 0)
+                            input.custom-control-input(id=`shipping${index}`,type="radio", name="shipping", checked)
+                        else
+                            input.custom-control-input(id=`shipping${index}`,type="radio", name="shipping")
+                        label.custom-control-label.text-sm.font-weight-normal(for=`shipping${index}`) #{val} $10            
+    
+    tr
+        th.py-4.text-uppercase.font-weight-normal.border-dark.align-bottom Total
+        td.py-4.text-right.h3.font-weight-normal.border-dark $400.00
+
+    - payment = ['Pay on delivery', 'Card payment', 'PayPal']
+    each val, index in payment
+        - showCollapseClass = ''
+        - paddingClass = 'py-4'
+
+        if (index === 0)
+            - showCollapseClass = 'show'
+            - paddingClass = 'pt-5 pb-4 border-dark'
+        else if (index === 2)
+            - paddingClass = 'pt-4 pb-5'
+
+        tr
+            th(colspan="2", class=paddingClass)             
+                .custom-control.custom-radio
+                    if (index === 0)
+                        input.custom-control-input(id=`payment${index}`,type="radio", name="payment", checked)
+                    else
+                        input.custom-control-input(id=`payment${index}`,type="radio", name="payment")
+                    label.custom-control-label.text-sm.font-weight-normal(for=`payment${index}`, data-toggle="collapse", data-target=`#paymentinfo_${index}`) #{val}
+
+                .collapse(id=`paymentinfo_${index}`, data-parent="table.table", class=showCollapseClass)
+                    .pt-4
+                        p.text-muted.text-sm #{dummyText[index].substr(0,100)}
+
+
+p.text-muted.text-sm Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our <a href="#">privacy policy</a>.
+
+p.text-muted.text-sm.mb-5 I have read and agree to the website <a href="#">terms and conditions</a>. * 
+
+a.btn.btn-dark.btn-block.btn-lg.mb-5(href="checkout-confirmed.html") Place order
+// this should be <button type="submit"> on your site
+    

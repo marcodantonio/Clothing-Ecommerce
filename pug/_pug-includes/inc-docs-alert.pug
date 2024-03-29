@@ -1,0 +1,16 @@
+.docs-example
+    - alerts = []
+    - alerts.push({class: "primary", icon: 'delivery-1'})
+    - alerts.push({class: "secondary", icon: 'delivery-1'})
+    - alerts.push({class: "success", icon: 'delivery-1'})
+    - alerts.push({class: "danger", icon: 'delivery-1'})
+    - alerts.push({class: "info", icon: 'delivery-1'})
+    - alerts.push({class: "light", icon: 'delivery-1'})
+    - alerts.push({class: "dark", icon: 'delivery-1'})
+
+    each val in alerts
+        .d-flex.align-items-center.pr-3(role='alert', class=`alert alert-${val.class}`)
+            +svgIcon(val.icon ,'d-none d-sm-block w-3rem h-3rem svg-icon-light flex-shrink-0 mr-3')
+            | This is a #{val.class} alert — check it out! 
+            button.close.close-absolute.close-centered.opacity-10.text-inherit(type='button', data-dismiss='alert', aria-label='Close')
+                +svgIcon('close-1','w-2rem h-2rem')

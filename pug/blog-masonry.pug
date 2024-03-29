@@ -1,0 +1,51 @@
+extends _pug-includes/layout.pug
+
+block vars
+    - var parallax = true
+    - var masonry = true
+
+block content
+    
+    - var breadcrumbs = []
+    - breadcrumbs.push({name: 'Home', link: 'index.html'})
+    - breadcrumbs.push({name: 'Blog'})
+    - var heroHeading = 'Blog'
+    - var heroText = '<p class="lead text-muted">As am hastily invited settled at limited civilly fortune me. Really spring in extent an by. Judge but built party world. Of so am he remember although required. Bachelor unpacked be advanced at. Confined in declared marianne is vicinity.</p>'
+    - var heroImage = path + 'img/photo/chris-murray-YGzEX5yLKeA-unsplash.jpg'
+
+    .container.mt-5(class=heroClass)
+        section.hero.hero-boxed.py-lg-7(class=overlayClass, data-parallax="scroll", data-image-src=heroImage, data-speed="0.5", data-position-x="center", data-position-y=heroImageY)
+            .z-index-10
+                // Breadcrumbs 
+                ol(class="breadcrumb pl-0" + breadcrumbClass)
+                    each val in breadcrumbs
+                        if (val.link)
+                            li.breadcrumb-item
+                                a(href=val.link) #{val.name}
+                        else
+                            li.breadcrumb-item.active #{val.name}        
+                h1.display-2.text-white #{heroHeading}
+
+
+    include _pug-includes/inc-var-blogitems-masonry.pug
+
+    section.pt-5.pb-6
+        .container.overflow-hidden
+            .mx-n3.mx-lg-n5.masonry-wrapper
+                
+                    each val, index in posts
+                        //-- delay = (index % 3) * 200
+                        +blog(val, 'item col-lg-4 col-sm-6 mb-5 px-lg-5', true, 0)
+
+                
+            // Pagination 
+            nav(aria-label='Blog pagination')
+                ul.pagination.justify-content-between.mb-5
+                    li.page-item
+                        a.page-link(href='#') 
+                            i.fa.fa-chevron-left.mr-1
+                            | Older posts
+                    
+                    li.page-item.disabled
+                        a.page-link(href='#', tabindex='-1') Newer posts  
+                            i.fa.fa-chevron-right.ml-1        

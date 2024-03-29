@@ -1,0 +1,23 @@
+section.py-5(class=similarClass)
+    .container
+        h5.mb-4 You might also like these
+
+        include inc-var-shopitems.pug
+        
+        - var itemClass = ''
+        - var additionalButtons = false
+        
+        .position-relative
+            // Similar Items Slider
+            .swiper-container.similar-slider
+                .swiper-wrapper.pb-5
+                    each val,index in shopItems
+                        if index < 9
+                            // similar item slide
+                            .swiper-slide
+                                +product(val, itemClass, additionalButtons)
+
+                .swiper-pagination    
+            .swiper-outside-nav.align-with-products
+                .swiper-button-prev#similarPrev
+                .swiper-button-next#similarNext

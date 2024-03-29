@@ -1,0 +1,99 @@
+.product-grid-header
+    .mr-3.mb-3 
+        | Showing 
+        strong 1-12 
+        | of 
+        strong 158 
+        | products
+    
+    .mr-3.mb-3
+        span.mr-2 Show
+        - var show = []
+        - show.push({count: 12, activeClass: 'active'})
+        - show.push({count: 24, activeClass: ''})
+        - show.push({count: 'All', activeClass: ''})
+
+        each val in show
+            a(href="#", class=`product-grid-header-show ${val.activeClass}`) #{val.count}    
+    
+    .mr-3.mb-3
+        button.btn.btn-link.text-dark.pl-0.dropdown-toggle.text-decoration-none(data-toggle="collapse", data-target="#productFilter",  aria-expanded="false", aria-controls="productFilter") Filter
+        
+    .mb-3.d-flex.align-items-center
+        span.d-inline-block.mr-2 Sort by
+        select.selectpicker(name="sort", id="form_sort", data-style="btn-selectpicker border-0", title="")
+                    - var sortBy = ['Default', 'Popularity', 'Rating', 'Newest first']
+                    each val, index in sortBy
+                        option(value=`sortBy_${index}`) #{val}                   
+
+    .collapse#productFilter.w-100
+        .py-4.mb-5
+            .row
+                .col-sm-6.col-xl-3.mb-3
+
+                    h6.text-dark Brand
+                    - var brands = []
+                    - brands.push({name: 'Calvin Klein', count: 18, checked: true})
+                    - brands.push({name: 'Levi Strauss', count: 30, checked: true})
+                    - brands.push({name: 'Hugo Boss', count: 120})
+                    - brands.push({name: 'Tomi Hilfiger', count: 70})
+                    - brands.push({name: 'Tom Ford ', count: 110})            
+
+                    each val, index in brands
+                        .form-group.mb-1
+                            .custom-control.custom-checkbox
+                                if val.checked
+                                    input.custom-control-input(id=`brand${index}`, type="checkbox", name="clothes-brand", checked)
+                                else
+                                    input.custom-control-input(id=`brand${index}`, type="checkbox", name="clothes-brand")
+                                label.custom-control-label(for=`brand${index}`) #{val.name} 
+                                    small (#{val.count})
+
+                .col-sm-6.col-xl-3.mb-3
+
+                    h6.text-dark Size 
+
+                    - var sizes = ['Small', 'Medium', 'Large', 'X-Large']
+                    
+                    each val, index in sizes
+                        .form-group.mb-1
+                            .custom-control.custom-radio
+                                if (index === 0)
+                                    input.custom-control-input(id=`size${index}`,type="radio", name="size", checked)
+                                else
+                                    input.custom-control-input(id=`size${index}`,type="radio", name="size")
+                                label.custom-control-label(for=`size${index}`) #{val}
+
+                .col-sm-6.col-xl-3.mb-3
+                    h6.text-dark Price  
+                
+                    #slider-snap
+                    .nouislider-values.mb-4
+                        .min From $
+                            span#slider-snap-value-lower
+                        .max To $
+                            span#slider-snap-value-upper
+
+                        input.slider-snap-input(type="hidden", name="pricefrom", id="slider-snap-input-lower", value="40")
+                        input.slider-snap-input(type="hidden", name="priceto",  id="slider-snap-input-upper", value="110")    
+
+                    h6.text-dark Colour 
+                    include inc-component-colours.pug
+                .col-sm-6.col-xl-3.mb-3
+                    h6.text-dark Tags
+
+                    each val, index in ['Modern', 'Trendy', 'Smart', 'Casual', 'Formal']
+                        .form-group.mb-1
+                            .custom-control.custom-checkbox
+                                if (index == 0)
+                                    input.custom-control-input(id=`tag${index}`, type="checkbox", name="tags", checked)
+                                else
+                                    input.custom-control-input(id=`tag${index}`, type="checkbox", name="tags")
+                                label.custom-control-label(for=`tag${index}`) #{val} 
+                                    small (5)
+
+
+            button.btn.btn-link.d-flex.align-items-center.pl-0.ml-n3 
+                +svgIcon('close-1', 'w-3rem h-3rem mr-n1')
+                | Clear all filters
+

@@ -1,0 +1,47 @@
+#accordion(role='tablist')
+    .card.border-0.shadow.mb-3
+        #headingOne.card-header.accordion-header(role='tab')
+            a.accordion-link(data-toggle='collapse', href='#collapseOne', aria-expanded='true', aria-controls='collapseOne')
+                | Option one
+        #collapseOne.collapse.show(role='tabpanel', aria-labelledby='headingOne',  data-parent='#accordion')
+            .card-body.py-5
+                form(action="#")
+                    .row
+                        .form-group.col-md-6
+                            label.form-label(for="card-name") Name on Card
+                            input.form-control(type="text", name="card-name", placeholder="Name on card", id="card-name")
+                        .form-group.col-md-6
+                            label.form-label(for="card-number") Card Number
+                            input.form-control(type="text", name="card-number", placeholder="Card number", id="card-number")
+                        .form-group.col-md-4
+                            label.form-label(for="expiry-date") Expiry Date
+                            input.form-control(type="text", name="expiry-date", placeholder="MM/YY", id="expiry-date")
+                        .form-group.col-md-4
+                            label.form-label(for="cvv") CVC/CVV
+                            input.form-control(type="text", name="cvv", placeholder="123", id="cvv")
+                        .form-group.col-md-4
+                            label.form-label(for="zip") ZIP
+                            input.form-control(type="text", name="zip", placeholder="123", id="zip")
+                
+    .card.border-0.shadow.mb-3
+        #headingTwo.card-header.accordion-header(role='tab')
+            a.accordion-link.collapsed(data-toggle='collapse', href='#collapseTwo', aria-expanded='false', aria-controls='collapseTwo')
+                | Paypal
+        #collapseTwo.collapse(role='tabpanel', aria-labelledby='headingTwo', data-parent='#accordion')
+            .card-body.py-5
+                .custom-control.custom-radio
+                    input.custom-control-input(id="payment-method-1",type="radio", name="payment")
+                    label.custom-control-label(for="payment-method-1") 
+                        span.d-block.h6.mt-1.mb-3  Pay with PayPal
+                        span.text-muted.text-sm #{dummyText[0]}                    
+    .card.border-0.shadow.mb-3
+        #headingThree.card-header.accordion-header(role='tab')
+            a.accordion-link.collapsed(data-toggle='collapse', href='#collapseThree', aria-expanded='false', aria-controls='collapseThree')
+                | Pay on delivery
+        #collapseThree.collapse(role='tabpanel', aria-labelledby='headingThree', data-parent='#accordion')
+            .card-body.py-5
+                .custom-control.custom-radio
+                    input.custom-control-input(id="payment-method-2",type="radio", name="payment")
+                    label.custom-control-label(for="payment-method-2") 
+                        span.d-block.h6.mt-1.mb-3  Pay on delivery
+                        span.text-muted.text-sm #{dummyText[1]}         

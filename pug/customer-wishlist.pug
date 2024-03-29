@@ -1,0 +1,79 @@
+extends _pug-includes/layout.pug
+
+block vars
+    - var active = 'customer-wishlist.html'  
+    - var customerZone = true
+
+block content
+
+    - var breadcrumbs = []
+    - breadcrumbs.push({name: 'Home', link: 'index.html'})
+    - breadcrumbs.push({name: 'Wishlist'})
+    - var heroHeading = 'Wishlist'
+    - var heroText = '<p class="lead text-muted mb-0">You have 3 items in your wishlist.</p>'
+    
+    include _pug-includes/inc-hero.pug
+    
+    // Wishlist Section
+    .container.pb-6
+
+        .row
+            .col-lg-8.col-xl-9
+
+                .cart.mb-5.mb-lg-0
+                    
+                    include _pug-includes/inc-var-basketitems.pug
+
+                    .cart-body
+                        each val, index in basketProducts
+
+                            - var inStock = 'In Stock'
+                            - var inStockBadge = 'badge-primary-light'
+
+                            if (index % 3 == 1)
+                                - inStock = 'Out of stock'
+                                - inStockBadge = 'badge-danger-light'                            
+                            else if (index % 3 == 2)
+                                - inStock = 'Being restocked'
+                                - inStockBadge = 'badge-info-light'                            
+
+                            // Product
+                            .cart-item
+                                .row.d-flex.align-items-center.text-left.text-md-center
+                                    .col-12.col-md-5
+                                        a(href="#").cart-remove.close.mt-3.d-md-none
+                                            i.fa.fa-times
+                                        a.d-md-none(href="#")
+                                            +svgIcon('add-to-cart-1','w-2rem h-2rem mt-2 mr-5 float-right')
+                                        .d-flex.align-items-center
+                                            a(href="detail-1.html")
+                                                img.cart-item-img(src=val.image, alt="...")
+                                            .cart-title.text-left
+                                                a.text-dark(href="detail-1.html")
+                                                    strong #{val.name}
+                                                br
+                                                span.text-muted.text-sm Size: #{val.size}
+                                                if (val.color)
+                                                    br
+                                                    span.text-muted.text-sm Colour: #{val.color}
+                                    .col-12.col-md-7.mt-4.mt-md-0
+                                        .row.align-items-center
+                                            .col-md-2
+                                                .row
+                                                    .col-6.d-md-none.text-muted Price per item
+                                                    .col-6.col-md-12.text-right.text-md-center #{val.itemPrice}
+                                            .col-md-3 
+                                                .row
+                                                    .col-6.d-md-none.text-muted Status 
+                                                    .col-6.col-md-12.text-right.text-md-left 
+                                                        .badge.p-lg-2(class=inStockBadge) #{inStock}
+                                            .col-md-4.d-none.d-md-block.text-center 
+                                                if (inStock == 'In Stock')
+                                                    a.mt-4.mt-md-0.text-primary(href="#")
+                                                        +svgIcon('add-to-cart-1','w-2rem h-2rem')
+                                            
+                                            .col-1.d-none.d-md-block.text-center
+                                                a(href="#").cart-remove.text-muted 
+                                                    +svgIcon('close-1','w-2rem h-2rem mt-2')
+
+            include _pug-includes/inc-customer-sidebar.pug

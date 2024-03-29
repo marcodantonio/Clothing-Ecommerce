@@ -1,0 +1,22 @@
+include dummyText
+include mixins
+doctype
+html(lang='en')
+  block vars
+
+  if (!path)
+    - var path = ''
+
+  head
+    include head.pug
+  
+  if (active == 'docs')
+    - var bodyAttrs = {'data-spy': "scroll", 'data-target': "#components-nav"}
+  else
+    - var bodyAttrs = {}
+
+  body&attributes(bodyAttrs)
+
+      block content
+
+      include scripts.pug

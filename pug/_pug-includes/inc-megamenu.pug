@@ -1,0 +1,34 @@
+if (!megamenuLinkClass)
+    - var megamenuLinkClass = ''
+
+// Megamenu
+li.nav-item.dropdown.position-static
+    a.nav-link.dropdown-toggle(href="#", data-toggle='dropdown', class=megamenuLinkClass) Pages
+    .dropdown-menu.megamenu.px-4.px-lg-5.py-lg-5(data-translate-x="-50%")
+            .row
+                .col-lg-3.col-sm-6
+                    
+                    +megamenuList('Homepage', homeLinks, 'img/blog/christopher-campbell-28571-unsplash.jpg')   
+
+                    +megamenuList('Category', shopLinks, '', 'mb-lg-0')                                                                                           
+                 
+
+                .col-lg-3.col-sm-6
+
+                    +megamenuList('Order process', orderLinks, 'img/blog/ian-dooley-347962-unsplash.jpg')
+                            
+                    +megamenuList('Product', detailLinks, '', 'mb-lg-0')                                                                                                               
+                                        
+            
+                .col-lg-3.col-sm-6
+
+                    - links = {'blog.html': 'Blog', 'blog-masonry.html': 'Blog - Masonry', 'post.html': 'Post'}                                                
+                    +megamenuList('Blog', links, 'img/blog/ian-dooley-347942-unsplash.jpg')   
+
+                    +megamenuList('Pages', pagesLinks)
+
+                .col-lg-3.col-sm-6
+
+                    +megamenuList('Customer', customerLinks, 'img/blog/photo-1534126511673-b6899657816a.jpg', 'mb-lg-0')            
+
+// /Megamenu end

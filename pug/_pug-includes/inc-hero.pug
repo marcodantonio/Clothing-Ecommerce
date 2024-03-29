@@ -1,0 +1,45 @@
+- overlayClass = ''
+- overlayContainer = ''
+
+
+if (!breadcrumbClass)
+    -var breadcrumbClass = ''
+
+if (heroImage)
+    - breadcrumbClass = 'no-border mb-0'
+
+if (heroImage && !heroImageY)
+    - heroImageY = "center"
+
+if (!heroClass)
+    - heroClass = ''
+
+if (!heroHeadingClass)
+    - var heroHeadingClass = 'hero-heading'    
+
+if (heroOverlayLight)
+    - overlayClass = 'light-overlay'
+    - overlayContainer = 'overlay-content'
+    - breadcrumbClass = 'text-dark'
+
+if (heroOverlayDark)
+    - overlayClass = 'dark-overlay'
+    - overlayContainer = 'overlay-content'
+    - heroHeadingClass = 'text-white'
+
+// Hero Section
+if (heroHeading && !heroImage)
+    section.hero.py-6(class=heroClass)
+        .container
+            if (heroColumns)
+                .row  
+                    div(class=heroColumns)
+                        include inc-hero-content.pug
+
+            else
+                include inc-hero-content.pug
+            
+if (heroImage)
+    section.hero.hero-image(class=overlayClass, data-parallax="scroll", data-image-src=heroImage, data-speed="0.5", data-position-x="center", data-position-y=heroImageY/*, data-bleed="20"*/)
+        .container(class=overlayContainer)
+            include inc-hero-content.pug

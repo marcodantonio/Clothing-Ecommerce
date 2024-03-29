@@ -1,0 +1,53 @@
+.cart
+    .cart-wrapper
+        .cart-header
+            .row
+                if (finalReview)
+                    .col-6 Item
+                else
+                    .col-5 Item
+                .col-2.text-center Price
+                .col-2.text-right Quantity
+                .col-2.text-right Total
+                if (!finalReview)
+                    .col-1
+        
+        include inc-var-basketitems.pug
+
+        .cart-body
+            each val in basketProducts
+                // Product
+                .cart-item
+                    .row.d-flex.align-items-center.text-center
+                        if (finalReview) 
+                            - var columnClass = 'col-6'
+                        else
+                            - var columnClass = 'col-5'
+                        div(class=columnClass)
+                            .d-flex.align-items-center
+                                a(href=path + "detail.html")
+                                    img.cart-item-img(src=path + val.image, alt="...")
+                                .cart-title.text-left
+                                    a.text-dark(href=path + "detail.html")
+                                        strong #{val.name}
+                                    br
+                                    span.text-muted.text-sm Size: #{val.size}
+                                    if (val.color)
+                                        br
+                                        span.text-muted.text-sm Colour: #{val.color}
+
+                        .col-2 #{val.itemPrice}
+                        .col-2
+                            if (!finalReview) 
+                                .d-flex.align-items-center
+                                    .btn.btn-items.btn-items-decrease -
+                                    input(type="text", value=val.items, class="form-control text-center input-items")
+                                    .btn.btn-items.btn-items-increase +
+                            else
+                                | #{val.items}
+                        .col-2.text-center #{val.totalPrice}
+                        
+                        if (!finalReview) 
+                            .col-1.text-center
+                                a(href="#").cart-remove.text-muted 
+                                    +svgIcon('close-1','w-3rem h-3rem svg-icon-light')

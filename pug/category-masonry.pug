@@ -1,0 +1,55 @@
+extends _pug-includes/layout.pug
+
+block vars
+    - var shop = true;
+    - var active = 'category'    
+    - var masonry = true;
+
+block content
+
+    - var breadcrumbs = []
+    - breadcrumbs.push({name: 'Home', link: 'index.html'})
+    - breadcrumbs.push({name: 'Jackets and tops'})
+    - var heroHeading = 'Jackets and tops'
+    - var heroText = '<p class="lead text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>'
+    
+    .container.py-6
+
+        // Breadcrumbs 
+        ol(class=`breadcrumb ${breadcrumbClass}`)
+            each val in breadcrumbs
+                if (val.link)
+                    li.breadcrumb-item
+                        a(href=val.link) #{val.name}
+                else
+                    li.breadcrumb-item.active #{val.name}   
+
+        // Hero Content
+        .hero-content.mb-6
+            h1(class=heroHeadingClass) #{heroHeading}
+            if heroText
+                .row    
+                    .col-xl-8 !{heroText}                
+        
+        
+        - var gridClass = ''
+        - var itemClass = 'item col-xl-3 col-lg-4 col-6'
+            
+        include _pug-includes/inc-grid-filter.pug
+                
+        include _pug-includes/inc-var-shopitems.pug
+
+        - var additionalButtons = true
+        - var dontSwapImage = true
+        - var masonry = true
+
+        if (!doNotDisplayView)
+            - var doNotDisplayView = false
+
+
+        .masonry-wrapper.mx-n3
+            .row
+                each val in shopItems
+                    +product(val, itemClass, additionalButtons, doNotDisplayView, dontSwapImage, masonry) 
+
+        include _pug-includes/inc-pagination.pug

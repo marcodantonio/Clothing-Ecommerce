@@ -1,0 +1,86 @@
+- var descClass = 'mb-4 text-muted'
+- inputSuffix = ''
+
+if (!detailInModal && !detail3)
+    h1.mb-4 Push-up Jeans
+else if (detail3) 
+    h1.h2.mb-4 Push-up Jeans  
+else
+    h2.mb-4.mt-4.mt-lg-1 Push-up Jeans
+    
+
+if (detailInModal)
+    - inputSuffix = '_modal'
+    
+
+.d-flex.flex-column.flex-sm-row.align-items-sm-center.justify-content-sm-between.mb-4
+    ul.list-inline.mb-2.mb-sm-0
+        li.list-inline-item.h4.font-weight-light.mb-0 $65.00
+        li.list-inline-item.text-muted.font-weight-light 
+            del $90.00
+
+    .d-flex.align-items-center.text-sm
+        ul.list-inline.mr-2.mb-0
+            li.list-inline-item.mr-0
+                i.fa.fa-star.text-primary
+            li.list-inline-item.mr-0
+                i.fa.fa-star.text-primary
+            li.list-inline-item.mr-0
+                i.fa.fa-star.text-primary
+            li.list-inline-item.mr-0
+                i.fa.fa-star.text-primary
+            li.list-inline-item.mr-0
+                i.fa.fa-star.text-gray-300
+                
+        span.text-muted.text-uppercase 25 reviews
+
+p(class=descClass) #{dummyText[3]}
+
+form(id=`buyForm${inputSuffix}`, action="#")
+    .row
+        .col-sm-6.col-lg-12.detail-option.mb-4
+            h6.detail-option-heading Size <span>(required)</span>
+            - var sizes = ['Small', 'Medium', 'Large']
+            select.selectpicker(name="size", data-style="btn-selectpicker")
+                each val,index in sizes
+                    option(value=`value_${index}`) #{val}
+                    
+        .col-sm-6.col-lg-12.detail-option.mb-5
+            h6.detail-option-heading Type <span>(required)</span>
+            - var materials = ['Hoodie', 'College']
+            each val,index in materials
+                label.btn.btn-sm.btn-outline-primary.detail-option-btn-label(for=`material_${index}${inputSuffix}`) 
+                    | #{val}
+                    input(type="radio", name="material", value=`value_${index}`, id=`material_${index}${inputSuffix}`, class="input-invisible", required)
+
+    .input-group.w-100.mb-4
+        input.form-control.form-control-lg.detail-quantity(name="items", type='number', value="1")
+        .input-group-append.flex-grow-1
+             button.btn.btn-dark.btn-block(type="submit") 
+                i.fa.fa-shopping-cart.mr-2
+                | Add to Cart
+
+    .row.mb-4
+        .col-6
+            a(href="#") 
+                i.far.fa-heart.mr-2
+                | Add to wishlist 
+        .col-6.text-right
+            ul.list-inline.mb-0
+                li.list-inline-item.mr-2
+                    a.text-dark.text-hover-primary(href="#")
+                        i.fab.fa-facebook-f 
+                li.list-inline-item
+                    a.text-dark.text-hover-primary(href="#")
+                        i.fab.fa-twitter 
+    ul.list-unstyled
+        li
+            strong Category:
+            | 
+            a.text-muted(href="#") Jeans
+        li
+            strong Tags:
+            | 
+            a.text-muted(href="#") Leisure
+            |, 
+            a.text-muted(href="#") Elegant

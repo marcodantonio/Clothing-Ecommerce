@@ -1,0 +1,276 @@
+mixin megamenuList(heading, links, image, listClass)
+    
+    if !listClass
+        - listClass = ''
+
+    if image
+        img.img-fluid.mb-3.d-none.d-lg-block(src=path + image, alt="")
+    
+    
+    // Megamenu list
+    h6 #{heading}
+    
+    ul.megamenu-list.list-unstyled(class=listClass)
+        each name, link in links
+            li.megamenu-list-item
+                a.megamenu-list-link(href=path + link) !{name}   
+
+mixin dropdownList(heading, links, itemClass)
+    if heading
+        h6.dropdown-header.h6(class=itemClass) #{heading}
+
+    if !itemClass
+        - itemClass = ''
+    
+    each name, link in links
+        a.dropdown-item(href=path + link, class=itemClass) !{name} 
+
+mixin navbarDropdown(array, active, name, icon, current)
+
+    - var dropdownId = name.replace(' ','').toLowerCase() + 'Dropdown'
+
+    - var liActiveClass = ''
+    - var dropdownExpanded = false
+    - var dropdownActiveClass = ''
+
+    if active 
+        - liActiveClass = 'active'
+        - dropdownExpanded = true
+        - dropdownActiveClass = 'show'
+
+    li(class=liActiveClass)
+        a(href="#" + dropdownId, aria-expanded=dropdownExpanded, data-toggle="collapse") 
+            i(class=icon)
+            | #{name} 
+        
+        ul(class="collapse list-unstyled " + dropdownActiveClass, id="#" + dropdownId)
+            each val in array
+                if (current == val.link)
+                    li.active
+                        a(href=val.link) !{val.name}
+                else
+                    li
+                        a(href=val.link) !{val.name}        
+
+mixin svgIcon(icon, iconClass)
+    if (!iconClass)
+        - iconClass = ''
+    svg.svg-icon(class=iconClass)
+        use(xlink:href='#' + icon)  
+
+mixin svgBlob(icon, iconClass, iconStyle)
+    if (!iconClass)
+        - iconClass = ''
+    if (!iconStyle)
+        - iconStyle = ''
+    svg.svg-blob(class=iconClass, style=iconStyle)
+        use(xlink:href='#' + icon)  
+
+mixin product(val, itemClass, useAos, aosDelay, dontSwapImage, masonry)
+    
+    if (masonry)
+        - image = (val.imgCropped && val.imgCropped !== '') ? val.imgCropped : val.img; 
+    else 
+        - image = val.img;
+        
+
+    if (useAos)
+        - attrs = {"data-aos" :"zoom-in", "data-aos-delay": 0}
+    else 
+        - attrs = {}
+
+    // product
+    div(class=itemClass)
+        .product&attributes(attrs)
+            .product-image.mb-md-3
+                if (val.sale !== '')
+                    .product-badge.badge.badge-primary #{val.sale}
+                if (val.new !== '')
+                    .product-badge.badge.badge-dark #{val.new}
+                if (val.fresh !== '')
+                    .product-badge.badge.badge-secondary #{val.fresh}
+                if (val.sold !== '')
+                    .product-badge.badge.badge-dark #{val.sold}
+                a(href=path + val.url)
+                    if (!dontSwapImage)
+                        .product-swap-image
+                            img.img-fluid.product-swap-image-front(src=path + image, alt=val.alt)
+                            img.img-fluid(src=path + val.img2, alt=val.alt)
+                    else
+                        img.img-fluid(src=path + image, alt=val.alt)
+                .product-hover-overlay
+                    a.text-dark.text-sm(href="#")
+                        +svgIcon('retail-bag-1','text-hover-primary svg-icon-heavy d-sm-none')   
+                        span.d-none.d-sm-inline Add to cart
+                    div
+                        a.text-dark.text-hover-primary.mr-2(href="#")
+                            +svgIcon('heart-1','svg-icon-heavy')   
+                        a.text-dark.text-hover-primary.text-decoration-none(href="#", data-toggle="modal", data-target="#quickView")
+                            +svgIcon('expand-1','svg-icon-heavy')
+                            
+            .position-relative
+                //- p.text-muted.text-sm.mb-1 #{val.category}
+                h3.text-base.mb-1
+                    a.text-dark(href=path + val.url) #{val.name}
+                span.text-gray-500.text-sm #{val.price}
+                .product-stars.text-xs
+                    i.fa.fa-star.text-primary
+                    i.fa.fa-star.text-primary
+                    i.fa.fa-star.text-primary
+                    i.fa.fa-star.text-muted
+                    i.fa.fa-star.text-muted
+
+    // /product   
+
+mixin productMasonry(val, itemClass, useAos, aosDelay, dontSwapImage)
+    
+    if (useAos)
+        - attrs = {"data-aos" :"zoom-in", "data-aos-delay": 0}
+    else 
+        - attrs = {}
+
+    // product
+    div(class=itemClass)
+        .product&attributes(attrs)
+            .product-image.mb-md-3
+                if (val.sale !== '')
+                    .product-badge.badge.badge-primary #{val.sale}
+                if (val.new !== '')
+                    .product-badge.badge.badge-dark #{val.new}
+                if (val.fresh !== '')
+                    .product-badge.badge.badge-secondary #{val.fresh}
+                if (val.sold !== '')
+                    .product-badge.badge.badge-dark #{val.sold}
+                a(href=path + val.url)
+                    if (!dontSwapImage)
+                        .product-swap-image
+                            img.img-fluid.product-swap-image-front(src=path + val.img, alt=val.alt)
+                            img.img-fluid(src=path + val.img2, alt=val.alt)
+                    else
+                        img.img-fluid(src=path + val.img, alt=val.alt)
+                .product-hover-overlay
+                    a.text-dark.text-sm(href="#")
+                        +svgIcon('retail-bag-1','text-hover-primary svg-icon-heavy d-sm-none')   
+                        span.d-none.d-sm-inline Add to cart
+                    div
+                        a.text-dark.text-hover-primary.mr-2(href="#")
+                            +svgIcon('heart-1','svg-icon-heavy')   
+                        a.text-dark.text-hover-primary.text-decoration-none(href="#", data-toggle="modal", data-target="#quickView")
+                            +svgIcon('expand-1','svg-icon-heavy')
+                            
+            .position-relative
+                //- p.text-muted.text-sm.mb-1 #{val.category}
+                h3.text-base.mb-1
+                    a.text-dark(href=path + val.url) #{val.name}
+                span.text-gray-500.text-sm #{val.price}
+                .product-stars.text-xs
+                    i.fa.fa-star.text-primary
+                    i.fa.fa-star.text-primary
+                    i.fa.fa-star.text-primary
+                    i.fa.fa-star.text-muted
+                    i.fa.fa-star.text-muted
+
+    // /product       
+
+mixin blog(val, itemClass, useAos, aosDelay)         
+    // post
+    div(class=itemClass)
+        if (useAos)
+            div(data-aos="zoom-in")
+                a(href="post.html").d-block.mb-4
+                    img.img-fluid(src=val.image, alt="")   
+                h5.mb-2
+                    a.text-dark(href="post.html") #{val.name}          
+                p.text-gray-500.text-sm
+                    a(href="#").text-uppercase.text-xs.mr-2 #{val.category}
+                    | January 16, 2019
+        else 
+            a(href="post.html").d-block.mb-4
+                img.img-fluid(src=val.image, alt="")   
+            h5.mb-2
+                a.text-dark(href="post.html") #{val.name}          
+            p.text-gray-500.text-sm
+                a(href="#").text-uppercase.text-xs.mr-2 #{val.category}
+                | January 16, 2019
+    // /post end
+
+mixin sidebarCartProduct(val)
+    // cart item
+    .navbar-cart-product 
+        .d-flex.align-items-center
+            a(href=path + "detail-1.html")
+                img.img-fluid.navbar-cart-product-image(src=path + val.image, alt="...")
+            .w-100
+                a.close(href="#")
+                    +svgIcon('close-1', 'sidebar-cart-icon')
+                .pl-3 
+                    a.navbar-cart-product-link.text-dark.link-animated(href=path + "detail-1.html") #{val.name}
+                    small.d-block.text-muted Quantity: 1 
+                    strong.d-block.text-sm $75.00     
+
+mixin categoryCard(val, itemClass, useAos, aosDelay)         
+    // category
+    div(class=itemClass)
+        if (useAos)
+            .card-scale(data-aos="zoom-in", data-aos-delay=delay)
+                .img-scale-container.mb-3
+                    img.img-fluid.img-scale(src=val.imgCropped, alt="")
+                h5 
+                    a.stretched-link.text-reset(href=val.link) #{val.name}
+                    | <span class="text-sm text-muted ml-2">#{val.count}</span>                        
+        else 
+            .card-scale
+                .img-scale-container.mb-3
+                    img.img-fluid.img-scale.mb-3(src=val.imgCropped, alt="")
+                h5 
+                    a.stretched-link.text-reset(href=val.link) #{val.name}
+                    | <span class="text-sm text-muted ml-2">#{val.count}</span>    
+    // /category end                        
+
+
+mixin docsSidebarLink(link, name, current)
+
+    - var activeClass = ''
+    
+    if current == link 
+        - activeClass = 'active'
+        
+    a.nav-link.mb-2(class=activeClass, href=path + link) !{name}  
+
+mixin componentDocNav(name)
+    
+    - var componentId = name.split(' ').join('').toLowerCase()
+
+    a.nav-link(data-smooth-scroll, href='#' + componentId) #{name}
+
+mixin componentDocItem(name, desc, showCode)
+    
+    - var componentId = name.split(' ').join('').toLowerCase()
+
+    .docs-item(id=componentId)
+        h5.text-uppercase.mb-4 #{name}
+        div.docs-desc !{desc}
+        
+        if showCode
+            a.btn.btn-link.pl-0(data-toggle="collapse", data-target='#' + componentId + 'code') Show code 
+                i.fa-arrow-right.fa.ml-2
+
+        if block
+            .mt-5        
+                block
+
+    
+
+mixin componentDocCode(name)
+    - var codeId = name.split(' ').join('').toLowerCase() + 'code'
+
+    pre.collapse(id=codeId)
+        code.language-html
+            +escape()
+                block
+
+mixin escape()
+    - var oldBuf = buf;
+    - buf = [];
+    block
+    - buf  = oldBuf.concat(buf.map(jade.escape));    

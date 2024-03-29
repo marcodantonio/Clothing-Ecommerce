@@ -1,0 +1,50 @@
+extends _pug-includes/layout.pug
+
+block vars
+    - var shop = true;
+    - var priceSlider = false;    
+    - var quickViewModal = true;
+    - var active = 'category'    
+
+block content
+
+    - var breadcrumbs = []
+    - breadcrumbs.push({name: 'Home', link: 'index.html'})
+    - breadcrumbs.push({name: 'Shop'})
+    - var heroHeading = 'Ladies'
+    - var heroText = '<p class="lead text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>'
+    
+    .container.py-6
+        
+        - var gridClass = ''
+        - var itemClass = 'col-xl-3 col-sm-4 col-6'
+        - var doNotDisplayView = true
+
+        // Breadcrumbs 
+        ol(class=`breadcrumb ${breadcrumbClass}`)
+            each val in breadcrumbs
+                if (val.link)
+                    li.breadcrumb-item
+                        a(href=val.link) #{val.name}
+                else
+                    li.breadcrumb-item.active #{val.name}                                   
+
+
+        // Hero Content
+        .hero-content.pb-5
+            h1(class=heroHeadingClass) #{heroHeading}
+            if heroText
+                .row    
+                    .col-xl-8 !{heroText}   
+
+        // Grid 
+        div(class="products-grid " + gridClass)
+
+            include _pug-includes/inc-var-categoryitems.pug
+
+            .row
+                each val, index in categoryItems
+                    if index < 9
+                        - categoryClass = 'col-sm-6 col-lg-4 mb-5'
+
+                        +categoryCard(val, categoryClass, true, 0)

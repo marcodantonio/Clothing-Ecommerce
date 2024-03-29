@@ -1,0 +1,117 @@
+extends _pug-includes/layout.pug
+
+block vars
+    - var active = 'about'  
+    
+block content
+
+    
+    .container.py-6
+        .row
+            .col-xl-2
+                .horizontal-line.d-none.d-xl-block
+            .col-xl-6
+                h6.text-primary.text-uppercase.letter-spacing-5.mb-3  About us
+                h1.display-3.font-weight-bold.mb-5 We are Varkala
+                p.text-lg.text-muted #{dummyText[0]}
+
+    .container.pt-4.pb-6
+        .row.mb-5
+            .col-xl-2
+                .horizontal-line.d-none.d-xl-block
+            .col-xl-8
+                h6.text-primary.text-uppercase.letter-spacing-5.mb-3  The old times
+                h2.display-3.font-weight-bold.mb-5 History of Varkala
+        .row.mb-5
+            .col-sm-4
+                img.img-fluid(src=path + "img/photo/raoul-ortega-2JtF6pYAOOI-unsplash.jpg", alt="")
+            .col-sm-8.col-md-6.offset-md-1.d-flex.align-items-center
+                div
+                    h6.text-uppercase.text-muted.letter-spacing-5.mb-1 Humble beginnings
+                    h2.mb-4 We started as little
+                    p.text-muted #{dummyText[1]}
+        .row.mb-5
+            .col-sm-8.col-md-7.col-lg-6.d-flex.align-items-center
+                div
+                    h6.text-uppercase.text-muted.letter-spacing-5.mb-1 Varkala today
+                    h2.mb-4 And then we grew a bit
+                    p.text-muted #{dummyText[1]}
+                    //-div(style="width: 80px; border-top: solid 1px #333; margin-top: 3rem;")
+            .col-sm-4.col-md-5.offset-lg-1
+                img.img-fluid(src= path + "img/photo/clark-street-mercantile-P3pI6xzovu0-unsplash.jpg", alt="")                    
+
+    
+    section.py-6.bg-gray-100
+        .container
+            .row
+                .col-lg-5
+                    h2.mb-4 Varkala's Milestones
+                    p.text-lg.text-muted.mb-5.mb-lg-0 #{dummyText[5]} 
+
+                - var milestones = [1995, 2000, 2010, 2018]
+                .col-lg-6.ml-lg-auto
+                    .row
+                        each val, index in milestones
+                            .col-sm-6.mb-4
+                                h4 #{val}
+                                p.text-muted #{dummyText[index].substr(0, 120)} 
+
+    section.py-5
+        .container
+            .row
+                .col-lg-5
+                    .p-5
+                        img.img-fluid.rounded-circle(src="img/avatar/avatar-0.jpg", alt="")            
+                .col-lg-6.d-flex.align-items-center
+                    div
+                        blockquote.blockquote-icon.mb-5
+                            p.text-xl.text-serif.mb-4 #{dummyText[3]}   
+                            h6.text-lg.text-uppercase.text-primary — Frankie Kafka, Founder
+                        p.text-muted #{dummyText[3]} 
+
+    .container.pt-6.pb-5
+        .row
+            .col-xl-2
+                .horizontal-line.d-none.d-xl-block
+            .col-xl-10
+                h6.text-primary.text-uppercase.letter-spacing-5.mb-3  Our team
+                h1.display-3.font-weight-bold.mb-3 People
+                p.text-muted.mb-6 #{dummyText[4]}
+
+                - var team = []
+                - team.push({name: 'Frankie Kafka', position: 'CEO & Founder'})
+                - team.push({name: 'Brittney Day', position: 'CTO'})
+                - team.push({name: 'Kim Cervantes', position: 'Marketing'})
+                - team.push({name: 'Massey Armstrong', position: 'Customer care'})
+                - team.push({name: 'B.J. Petersen', position: 'E-commerce'})
+                - team.push({name: 'Mayra Holman', position: 'Customer care'})
+                - team.push({name: 'Gabriel Fisher', position: 'Customer care'})
+                - team.push({name: 'Jose Holman', position: 'Customer care'})
+                .row
+                    each val, index in team
+                        .col-6.col-md-3.text-center.mb-4
+                                img.avatar.avatar-xxl.shadow-0.mb-3(src=`img/avatar/avatar-${index}.jpg`, alt="")
+                                h4.h6.mb-1 #{val.name}
+                                p.text-sm.text-muted #{val.position} 
+
+
+    section.bg-light.py-6
+        .container
+            include _pug-includes/inc-brands.pug
+
+    section.py-6
+        .container
+            .row
+                .col-lg-10.mx-auto.text-center
+                    h2.mb-6 At Varkala, we want the right choice to be as easy as putting on a great T-shirt
+
+                .col-lg-5.offset-lg-1
+                    p.text-muted.text-sm #{dummyText[5]} 
+                .col-lg-5 
+                    p.text-muted.text-sm #{dummyText[1]} 
+                
+
+
+
+
+            

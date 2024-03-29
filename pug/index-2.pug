@@ -1,0 +1,105 @@
+extends _pug-includes/layout.pug
+
+block vars
+
+    - var navbarClass = 'bg-transparent border-0 shadow-0 navbar-light px-lg-5 '  
+    - var headerClass = 'header header-absolute'       
+    - var topbarClass = 'bg-transparent'       
+    - var active = 'home'      
+
+block content
+
+    - slider = []
+    - slider.push({title: 'Blouses & Tops',image: 'img/photo/home-5.jpg', containerClass: 'align-items-center', subtitle: 'Our all-time favourites', subtitleClass: 'text-dark font-weight-light', text: dummyText[1].substr(0,100), button: 'Discover more', columnClass: 'col-lg-6 ml-auto', slideClass: 'bg-cover-left'})
+    - slider.push({title: 'Blouses & Tops',image: 'img/photo/home-1.jpg', containerClass: 'align-items-center', subtitle: 'Our all-time favourites', subtitleClass: 'text-dark font-weight-light', text: dummyText[1].substr(0,100), button: 'Discover more', columnClass: 'col-lg-6', slideClass: 'bg-cover-right'})
+    - slider.push({title: 'Linen and denim',image: 'img/photo/home-2.jpg', containerClass: 'justify-content-center align-items-center text-center', subtitle: 'Blue & White', subtitleClass: 'text-dark font-weight-light', button: 'Start shopping', columnClass: 'col-lg-6', slideClass: ''})    
+
+    // Slider main container
+    .swiper-container.home-slider(style="height: 80vh; min-height: 600px;")
+        // Additional required wrapper
+        .swiper-wrapper
+            // Slides
+            each val, index in slider
+                .swiper-slide.bg-cover(style=`background-image: url('${val.image}');`, class=val.slideClass)
+                    .container-fluid.px-lg-6.h-100
+                        .row.h-100(class=val.containerClass, data-swiper-parallax="-500")
+                            div(class=val.columnClass)
+                                if (val.subtitle)
+                                    p.subtitle.letter-spacing-3.mb-3(class=val.subtitleClass) #{val.subtitle}
+                                h2.display-3(class=val.headingClass, style="line-height: 1") #{val.title}
+                                if (val.text)
+                                    p.text-muted.mb-5 #{val.text}
+                                if (val.button)
+                                    a.btn.btn-dark(href="#") #{val.button}
+                    
+
+        .swiper-pagination
+        .swiper-nav.d-none.d-lg-block
+            .swiper-button-prev#homePrev
+            .swiper-button-next#homeNext        
+
+    - var banners = []
+    - banners.push({title: 'Jackets', subtitle: 'Denim & parkas', link: '#', image: 'img/product/category-jackets-3-colour-bg-2.jpg', class: 'col-6 col-lg-7', colour: '#425c81', bgColour: '#c6d5ea'})
+    - banners.push({title: 'Coats', subtitle: 'Get ready for winter', link: '#', image: 'img/product/category-coats-2-colour-bg-2.jpg', class: 'col-6 col-lg-5', colour: '#94585e', bgColour: '#fce6e8'})
+    - banners.push({title: 'Dresses', subtitle: 'Let yourself shine', link: '#', image: 'img/product/category-dresses-2-colour-bg-2.jpg', class: 'col-6 col-lg-5', colour: '#9e9056', bgColour: '#faf7e6'})
+    - banners.push({title: 'Jeans', subtitle: 'Latest denim trends', link: '#', image: 'img/product/category-jeans-colour-bg-2.jpg', class: 'col-6  col-lg-7', colour: '#9c5f8f', bgColour: '#f8ebf5'})
+    - banners.push({title: 'Bags', subtitle: 'Bags & accessories', link: '#', image: 'img/product/category-bags-2-colour-bg-2.jpg', class: 'col-6 col-lg-7', colour: '#418a70', bgColour: '#c9f2e4'})
+    - banners.push({title: 'Shoes', subtitle: 'Shoes & footwear', link: '#', image: 'img/product/category-shoes-colour-bg.jpg', class: 'col-6 col-lg-5', colour: '#775a3d', bgColour: '#ece2d6'})
+
+    .container.py-6
+        .row
+            each val, index in banners
+
+                - var additionalClass = 'pr-1'
+                if (index % 2 == 1)
+                    - additionalClass = 'pl-1'
+
+                .mb-2(class=val.class + additionalClass)
+                    .banner(style=`background-color:${val.bgColour}`)
+                        .banner-text.p-3.p-lg-5
+                            p.subtitle.text-sm(style=`color: ${val.colour}`) #{val.subtitle}
+                            h2.mb-0 #{val.title}      
+                        .banner-bg
+                            img.img-fluid(src=val.image, alt="")
+                        a.stretched-link.banner-link(href=val.link)
+                            span.sr-only See #{val.title}
+
+    .container.py-6
+        .text-center
+            h2 New Arrivals
+            p.lead.text-muted.mb-5 #{dummyText[0]}
+
+        .row.justify-content-between.align-items-center.mb-4
+            .col-12.col-md
+                ul.list-inline.text-center.text-md-left.mb-3.mb-md-0  
+                    li.list-inline-item
+                        a.text-dark(href="#") All Products 
+                    li.list-inline-item
+                        a.text-muted.text-hover-dark(href="#") Clothing 
+                    li.list-inline-item
+                        a.text-muted.text-hover-dark(href="#") Bags
+                    li.list-inline-item
+                        a.text-muted.text-hover-dark(href="#") Shoes
+                    li.list-inline-item
+                        a.text-muted.text-hover-dark(href="#") Accessories
+            .col-12.col-md-auto.text-center
+                a.btn.btn-link.px-0(href="#") All products
+
+        include _pug-includes/inc-var-shopitems.pug
+        - var additionalButtons = true
+        - var itemClass = 'col-xl-3 col-md-4 col-6'
+
+        .row
+            each val, index in shopItems
+                if (index < 8)
+                    +product(val, itemClass, additionalButtons, doNotDisplayView)     
+
+        include _pug-includes/inc-modal.pug
+
+    .container.py-6.text-center
+        h4.h1.mb-3 Summer Sales
+        h5.h2.font-weight-light.mb-5 Our biggest sales this year &mdash; up to 60% off!
+        p.h5.text-muted.mb-5 #{dummyText[1].substr(0,80)}!
+        a.btn.btn-dark(href="#") Start shopping
+
+

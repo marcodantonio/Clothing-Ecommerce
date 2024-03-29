@@ -1,0 +1,13 @@
+// Breadcrumbs 
+ol(class=`breadcrumb pl-0 ${breadcrumbClass}`)
+    each val in breadcrumbs
+        if (val.link)
+            li.breadcrumb-item
+                a(href=val.link) #{val.name}
+        else
+            li.breadcrumb-item.active #{val.name}        
+// Hero Content
+.hero-content
+    h1(class=heroHeadingClass) #{heroHeading}
+    if heroText
+        div !{heroText}

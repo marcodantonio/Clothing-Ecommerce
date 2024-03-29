@@ -1,0 +1,33 @@
+extends _pug-includes/layout.pug
+
+block content
+       
+    - var breadcrumbs = []
+    - breadcrumbs.push({name: 'Home', link: 'index.html'})
+    - breadcrumbs.push({name: 'Customer zone'})
+    - var heroHeading = 'Track your order'
+    - var heroHeadingClass = 'hero-heading mb-3'
+    - var heroText = '<p class="text-muted mb-0">To track your order please enter your Order ID in the box below and press the "Track" button. This was given to you on your receipt and in the confirmation email you should have received.</p>'
+
+    include _pug-includes/inc-hero.pug      
+
+    // customer login
+    section.pb-6
+        .container
+            .row
+                .col-lg-5
+                    .card
+
+                        .card-body.p-5
+                            form(action='customer-order.html', method='get')
+                                .form-group
+                                    label.form-label(for='orderId') Order ID
+                                    input#orderId.form-control(type='text', aria-describedby="orderIdHelp")
+                                    <small id="orderIdHelp" class="form-text text-muted">Found in your order confirmation email.</small>
+                                .form-group
+                                    label.form-label(for='email') Billing email
+                                    input#email.form-control(type='email', aria-describedby="emailHelp")
+                                    <small id="emailHelp" class="form-text text-muted">Email you used during checkout.</small>
+                                button.btn.btn-dark(type='submit')
+                                    i.fa.fa-map-marked.mr-2
+                                    |  Track

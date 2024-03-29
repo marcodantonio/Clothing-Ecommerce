@@ -1,0 +1,195 @@
+extends _pug-includes/layout.pug
+
+block vars
+    - var countdown = true
+    - var navbarClass = 'bg-transparent border-0 shadow-0 navbar-light px-lg-5 '  
+      
+    - var active = 'home'      
+
+block content
+
+    - slider = []
+    - slider.push({title: 'Design clocks on sale',image: 'img/product/clock-transparent.png', containerClass: 'align-items-center', subtitle: 'Time is almost up', subtitleClass: 'text-dark font-weight-light', headingClass:'mb-5', button: 'Start shopping', columnClass: 'col-lg-6', slideClass: '', blobColor: '#e7eaf9'})        
+    - slider.push({title: 'Black & White',image: 'img/product/chair2-transparent.png', containerClass: 'align-items-center', subtitle: 'Our all-time favourites', subtitleClass: 'text-dark font-weight-light', text: dummyText[1].substr(0,100), button: 'Discover more', columnClass: 'col-lg-6', slideClass: 'bg-cover-left', blobColor: '#ffdddd'})
+    - slider.push({title: 'Boxxez',image: 'img/product/box-transparent.png', containerClass: 'align-items-center', subtitle: 'Our all-time favourites', subtitleClass: 'text-dark font-weight-light', text: dummyText[1].substr(0,100), button: 'Discover more', columnClass: 'col-lg-6', slideClass: 'bg-cover-right', blobColor: '#f5e6a8'})
+
+    
+    +svgBlob('blob-shape', 'svg-blob-fill-current', ' width: 800px; height: 800px; max-width: 100%; left: -200px; top: -200px; color: #e0d4ab;')
+
+    // Slider main container
+    .swiper-container.home-slider-design(style="height: 50vh; min-height: 500px;")
+        // Additional required wrapper
+        .swiper-wrapper
+            // Slides
+            each val, index in slider
+                .swiper-slide(class=val.slideClass)
+                    .container.h-100
+                        .row.h-100(class=val.containerClass)
+                            .col-sm-6.pt-5.pt-md-0(data-swiper-parallax="-500")
+                                if (val.subtitle)
+                                    p.subtitle.letter-spacing-3.mb-3(class=val.subtitleClass) #{val.subtitle}
+                                h2.display-3(class=val.headingClass, style="line-height: 1") #{val.title}
+                                if (val.text)
+                                    p.text-muted.mb-5 #{val.text}
+                                if (val.button)
+                                    a.btn.btn-outline-primary(href="#") #{val.button}
+                            .col-sm-6.text-center
+                                img.img-fluid.home-slider-image(src=val.image, alt="", style="max-height: 500px",data-swiper-parallax="-200")
+                                +svgBlob('blob-shape-3', 'd-none d-md-inline-block svg-blob-fill-current svg-blob-swiper', 'color: '+val.blobColor)
+                    
+
+        .swiper-pagination
+        .swiper-nav.d-none.d-lg-block
+            .swiper-button-prev#homePrev
+            .swiper-button-next#homeNext    
+
+    section.py-6
+        .container
+
+            .row
+                .col-xl-8.mb-5
+                    p.text-uppercase.text-muted.font-weight-bold.mb-1 Top choices
+                    h3 Popular this week
+                    p.lead.text-muted Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.    
+
+            .row
+                .col-md-4.mb-4.mb-lg-6.pt-md-3.hover-scale
+                    a(href="detail-2.html")
+                        img.img-fluid(src="img/product/book-sq.jpg", alt="")
+                    .px-4.position-relative.z-index-2.mt--3
+                        a.text-dark.text-decoration-none(href="detail-2.html")
+                            h3 Furniture<br>source<br>book   
+                            p.text-muted $39.90
+                        p  
+                            a.btn.btn-link.text-dark.text-decoration-none.px-0(href="detail-2.html")  Shop now                       
+                .col-md-7.ml-auto.mb-4.mb-lg-5.hover-scale
+                    .position-absolute.z-index-5.py-6
+                        a.text-dark.text-decoration-none(href="detail-1.html")
+                            h2 Norwegg<br>design<br>chair    
+                            p.text-muted $139.90
+                        p  
+                            a.btn.btn-link.text-dark.text-decoration-none.px-0(href="detail-1.html")  Shop now      
+                    .ml-6
+                        a(href="detail-1.html")
+                            img.img-fluid(src="img/product/chair-2-sq.jpg", alt="")
+            .row
+                .col-md-4.ml-auto.pt-lg-6.mb-4.mb-lg-5.order-md-2.hover-scale
+                        a.text-dark.text-decoration-none(href="detail-1.html")
+                            img.img-fluid(src="img/product/box-sq.jpg", alt="")
+                        .px-4.position-relative.z-index-2.mt--3
+                            a.text-dark.text-decoration-none(href="detail-1.html")
+                                h3 Accessory<br>boxes
+                                p.text-muted $29.90
+                            p  
+                                a.btn.btn-link.text-dark.text-decoration-none.px-0  Shop now                 
+                .col-md-7.mb-4.mb-lg-5.order-md-1.hover-scale
+                    .position-absolute.z-index-5.py-6
+                        a.text-dark.text-decoration-none(href="detail-2.html")
+                            h2 Sunn<br>Clock<br>
+                            p.text-muted $89.90
+                        p  
+                            a.btn.btn-link.text-dark.text-decoration-none.px-0(href="detail-2.html")  Shop now                        
+                    .ml-6
+                        a(href="detail-2.html")
+                            img.img-fluid(src="img/product/clock-sq.jpg", alt="")
+
+            .row
+                .col-md-3.pt-md-3.mb-4.mb-lg-5.hover-scale
+                    a(href="detail-2.html")
+                        img.img-fluid(src="img/product/clock2-sq.jpg", alt="")
+                
+                    .px-4.position-relative.z-index-2.mt--3
+                        a.text-dark.text-decoration-none(href="detail-2.html")
+                            h3 Swiss<br>Minutes<br>Black     
+                            p.text-muted $149.90
+                        p  
+                            a.btn.btn-link.text-dark.text-decoration-none.px-0(href="detail-2.html")  Shop now                       
+                .col-md-8.ml-auto.hover-scale
+                    .position-absolute.z-index-5.py-6
+                        a.text-dark.text-decoration-none(href="detail-1.html")
+                            h2 Korona<br>dining<br>room chair     
+                            p.text-muted $39.90
+                        p  
+                            a.btn.btn-link.text-dark.text-decoration-none.px-0(href="detail-1.html")  Shop now      
+                    .ml-6
+                        a(href="detail-1.html")
+                            img.img-fluid(src="img/product/chair3-3-sq.jpg", alt="")    
+
+   
+    .position-relative.py-5(style="background-color: #ebf7ff;")
+        +svgBlob('blob-shape-4', '', 'left: -200px; top: 0;')        
+        .container
+            .row
+                .col-lg-6.d-flex.align-items-center
+                    div
+                        p.subtitle.mb-3.text-danger Deal of the week
+                        h3.h1 Black and white Nordegg chairs
+                        p.text-muted
+                            del.mr-3 $129.00
+                            span $79.00
+                        p.mb-4
+                            span.badge.badge-danger.p-3 $50 off
+                        .bg-white.px-5.py-4.shadow.mb-4#countdown
+                            .row.justify-content-between
+                                .col-6.col-sm-3.text-center.mb-4.mb-sm-0
+                                    h6.h4.mb-2.days &nbsp;
+                                    span.text-muted days
+                                .col-6.col-sm-3.text-center.mb-4.mb-sm-0
+                                    h6.h4.mb-2.hours &nbsp;
+                                    span.text-muted hours
+                                .col-6.col-sm-3.text-center
+                                    h6.h4.mb-2.minutes &nbsp;
+                                    span.text-muted minutes
+                                .col-6.col-sm-3.text-center
+                                    h6.h4.mb-2.seconds &nbsp;
+                                    span.text-muted seconds
+                    
+                        p
+                            a.btn.btn-outline-dark(href="#") Shop now
+                .col-lg-6.text-center
+                    img.img-fluid(src="img/product/chair2-transparent.png", alt="", style="max-height: 450px;")
+
+    .position-relative.py-6
+        +svgBlob('blob-shape-2', 'svg-blob-fill-current d-none d-md-block', 'right: -200px; top: 400px; color: #f7efcb;')    
+        .container
+            h2 New Arrivals
+            p.lead.text-muted.mb-5 #{dummyText[0]}
+            .row.justify-content-between.align-items-center.mb-4
+                .col-12.col-md
+                    ul.list-inline.mb-3.mb-md-0  
+                        li.list-inline-item
+                            a.text-dark(href="#") All Products 
+                        li.list-inline-item
+                            a.text-muted.text-hover-dark(href="#") Chairs 
+                        li.list-inline-item
+                            a.text-muted.text-hover-dark(href="#") Books
+                        li.list-inline-item
+                            a.text-muted.text-hover-dark(href="#") Clothes
+                        li.list-inline-item
+                            a.text-muted.text-hover-dark(href="#") Accessories
+                .col-12.col-md-auto
+                    a.btn.btn-link.px-0(href="#") All products
+
+            include _pug-includes/inc-var-designitems.pug
+            - var additionalButtons = true
+            - var itemClass = 'col-xl-3 col-md-4 col-6'
+
+            .row
+                each val, index in designItems
+                    if (index < 8)
+                        +product(val, itemClass, additionalButtons, doNotDisplayView)     
+
+            include _pug-includes/inc-modal.pug
+
+    .container.mb-5
+        .position-relative.text-center(style="background: #eae0bd; ")
+            .position-absolute.w-100.h-100.overflow-hidden
+                +svgBlob('blob-shape', 'svg-blob-fill-current text-primary', ' width: 400px; height: 400px; max-width: 100%; left: -200px; top: -50px; ')    
+            .py-6.px-4    
+                img.position-absolute.d-none.d-md-block(style="right: 0;top: -50px; max-height: 100%; z-index: 5;", src="img/product/chair-transparent.png", alt="")
+                .position-relative.z-index-10
+                    h4.display-3.font-weight-bold.mb-3 Summer Sales
+                    h5.h2.font-weight-light.mb-5 Our biggest sales this year &mdash; up to 60% off!
+                    a.btn.btn-outline-dark(href="#") Start shopping
+
+

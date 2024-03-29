@@ -1,0 +1,73 @@
+extends _pug-includes/layout.pug
+
+block content
+
+    - var breadcrumbs = []
+    - breadcrumbs.push({name: 'Home', link: 'index.html'})
+    - breadcrumbs.push({name: 'Checkout'})
+    - var heroHeading = 'Checkout'
+    - var heroText ='<p class="lead text-muted">Are you a returning customer? <a href="#">Login</a>.</p>'
+    
+    include _pug-includes/inc-hero.pug
+
+    // Checkout
+    
+    .container.pb-6
+        .row
+            .col-lg-7.pr-xl-6
+
+                form(action="checkout-confirmed.html")
+
+                    h5.mb-5 Invoice address 
+
+                    .row  
+                        - var fields = []
+                        - fields.push({name: 'Full Name', columns: 6, placeholder: 'Joe Black'})
+                        - fields.push({name: 'Email Address', columns: 6, placeholder: 'joe.black@gmail.com'})
+                        - fields.push({name: 'Street', columns: 6, placeholder: '123 Main St.'})
+                        - fields.push({name: 'City', columns: 6, placeholder: 'City'})
+                        - fields.push({name: 'ZIP', columns: 6, placeholder: 'Postal code'})
+                        - fields.push({name: 'State', columns: 6, placeholder: 'State'})
+                        - fields.push({name: 'Phone Number', columns: 6, placeholder: 'Phone Number'})
+
+                        - var suffix = 'invoice'
+
+                        each val, index in fields
+                            - var id = val.name.replace(' ','').toLowerCase() + '_' + suffix
+                            div(class=`form-group col-md-${val.columns} mb-4`)
+                                label.form-label(for=id) #{val.name}
+                                input.form-control.form-control-underlined.pl-0(type="text", name=id, id=id)
+
+                        .form-group.col-12.mt-3
+                            .custom-control.custom-checkbox
+                                input.custom-control-input(id="show-shipping-address", type="checkbox", name="show-shipping-address", data-toggle="collapse", data-target="#shippingAddress", aria-expanded="false", aria-controls="shippingAddress", role="button")
+                                label.custom-control-label.align-middle(for='show-shipping-address') Use a different shipping address
+                            
+                        // /Invoice Address
+
+                    // Shippping Address
+                    .collapse#shippingAddress
+
+                        h5.my-4 Shipping address 
+
+                        .row
+                            - var fields = []
+                            - fields.push({name: 'Street', columns: 6, placeholder: '123 Main St.'})
+                            - fields.push({name: 'City', columns: 6, placeholder: 'City'})
+                            - fields.push({name: 'ZIP', columns: 6, placeholder: 'Postal code'})
+                            - fields.push({name: 'State', columns: 6, placeholder: 'State'})
+                            - fields.push({name: 'Phone Number', columns: 6, placeholder: 'Phone Number'})
+
+                            - var suffix = 'shipping'
+
+                            each val, index in fields
+                                - var id = val.name.replace(' ','').toLowerCase() + '_' + suffix
+                                div(class=`form-group col-md-${val.columns} mb-4`)
+                                    label.form-label(for=id) #{val.name}
+                                    input.form-control.form-control-underlined.pl-0(type="text", name=id, id=id) 
+                    // /Shipping Address                            
+
+            
+            .col-lg-5
+                include _pug-includes/inc-checkout-summary-2.pug
+                        

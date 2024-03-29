@@ -1,0 +1,135 @@
+extends _pug-includes/layout.pug
+
+block content
+    
+    - var breadcrumbs = []
+    - breadcrumbs.push({name: 'Home', link: 'index.html'})
+    - breadcrumbs.push({name: 'Blog', link: 'blog.html'})
+    - breadcrumbs.push({name: 'Fashion, purpose & freedom'})
+    - var heroHeading = 'Fashion, purpose & freedom'
+    - var heroHeadingClass = 'mb-5'
+    - var heroColumns = 'col-xl-8 col-lg-10 mx-auto'
+    - var heroText ='<p class="text-muted mb-0"><a href=""><img src="img/avatar/person-3.jpg" alt="" class="w-2rem rounded-circle mr-2"></a> By <a href="#" class="text-muted font-weight-bold">John Slim</a> <span class="mx-1">|</span> January 16, 2016 in <a href="blog.html" class="font-weight-bold">Fashion</a> <span class="mx-1">|</span> <a href="#comments" class="text-muted" data-smooth-scroll>2 comments</a></p>'
+    - var heroClass = 'text-center'
+    - var heroHeadingClass = 'hero-heading'  
+    - var breadcrumbClass='justify-content-center'
+    
+    section.hero.py-5.py-lg-6(class=heroClass)
+        .container
+            .row  
+                div(class=heroColumns)
+                    include _pug-includes/inc-hero-content.pug
+
+    section
+        .container
+            .row
+                .col-xl-11.mx-auto
+                    img.img-fluid.mb-5(src="img/blog/ian-dooley-347942-unsplash.jpg", alt="")
+            .row
+                .col-xl-8.col-lg-10.mx-auto            
+                    p.lead.mb-5
+                            | As am hastily invited settled at limited civilly fortune me. Really spring in extent an by. Judge but built party world. Of so am
+                            | he remember although required. Bachelor unpacked be advanced at. Confined in declared marianne is vicinity.    
+                    .text-content.text-lg
+                        p
+                            <span class="capital text-dark">P</span>ellentesque habitant morbi tristique
+                            |  senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. 
+                            em Aenean ultricies mi vitae est.
+                            |  Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, 
+                            code commodo vitae
+                            | , ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. 
+                            a(href='#') Donec non enim
+                            |  in turpis pulvinar facilisis. Ut felis.
+                        p.text-center.text-muted.text-sm
+                            img.img-fluid(src='img/blog/ian-dooley-347962-unsplash.jpg', alt='Example blog post alt').mb-2
+                            br
+                            | Photo by Jack Tran, New York
+                        h2 Header Level 2
+                        ol
+                            li Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                            li Aliquam tincidunt mauris eu risus.
+                        blockquote.blockquote.blockquote-primary
+                            | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.
+                        h3 Header Level 3
+                        p
+                            | Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus
+                        h4 A nice list here
+                        ul.list-icon
+                            li Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  
+                            li Aliquam tincidunt mauris eu risus.
+                            li Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus
+                            li Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci.
+                        p
+                            img.img-fluid(src='img/blog/christopher-campbell-28571-unsplash.jpg', alt='Example blog post alt')
+                        p
+                            | Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus                   
+
+    
+
+    include _pug-includes/inc-var-blogitems.pug
+
+    // Similar posts
+    section.py-5
+        .container
+            h2.text-center.mb-5 You may also like            
+            .row
+                each val, index in posts
+                    if (index < 3)
+                        +blog(val, 'col-lg-4 col-sm-6 mb-5', true)            
+
+                
+
+    // comments
+    section.py-5#comments
+        .container
+            .row
+                .col-xl-8.col-lg-10.mx-auto    
+                    h6.h4.text-primary.text-uppercase.text-lg-right.mb-6 2 comments
+
+                    - var comments = []
+                    - comments.push({name: 'Julie Alma', posted: 'September 23, 2017 at 12:00 am', image: 'img/avatar/person-3.jpg', text: 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.', })
+                    - comments.push({name: 'Louise Armero', posted: 'June 23, 2017 at 12:35 pm', image: 'img/avatar/avatar-0.jpg', text: 'Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. ', })
+
+                    each val in comments
+
+                        // comment
+                        .row.mb-4
+                            .col-3.col-md-2.text-center-xs
+                                p
+                                    img.img-fluid.rounded-circle(src=val.image, alt='')
+                            .col-9.col-md-10
+                                h5 #{val.name}
+                                p.text-uppercase.text-sm.text-muted
+                                    i.far.fa-clock
+                                    |  #{val.posted}
+                                p.text-muted #{val.text}
+                                p
+                                    a.btn.btn-link.text-primary(href='#')
+                                        i.fa.fa-reply
+                                        |  Reply
+                        // /comment
+
+                    hr.mt-3.mb-5
+                    
+
+                    // comment form
+                    h5.mb-5 Leave a comment
+                    form.my-5(id="comment-form", method="get", action="#",class="form")
+                        .row
+                            .col-md-6                            
+                                .form-group.mb-4
+                                    label.form-label(for='nameComment') Name 
+                                        span.required *
+                                    input#nameComment.form-control.form-control-underlined(type='text')
+                            .col-md-6                                               
+                                .form-group.mb-4
+                                    label.form-label(for='Comment') Email 
+                                        span.required *
+                                    input#Comment.form-control.form-control-underlined(type='text')                                            
+                        .form-group.mb-4
+                            label.form-label(for='commentComment') Comment 
+                                span.required *
+                            textarea#commentComment.form-control.form-control-underlined(rows='4')
+                        button.btn.btn-outline-primary(type="submit")
+                            |  Leave comment                                   
+                    // /comment form
