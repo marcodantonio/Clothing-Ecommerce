@@ -16,7 +16,7 @@
     "bootstrap": "^4.4.1",
     "bootstrap-select": "^1.13.12",
     "imagesloaded": "^4.1.4",
-    "jquery": "~3.5.0",
+    "jquery": "~3.7.1",
     "jquery-parallax.js": "^1.5.0",
     "jquery-zoom": "^1.7.21",
     "jquery.cookie": "^1.4.1",
