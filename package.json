@@ -29,7 +29,7 @@
     "swiper": "^5.2.1"
   },
   "devDependencies": {
-    "browser-sync": "^2.26.7",
+    "browser-sync": "^2.29.3",
     "chalk": "^3.0.0",
     "del": "^5.1.0",
     "gulp": "^4.0.2",
