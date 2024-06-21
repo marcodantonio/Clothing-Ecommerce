@@ -15,7 +15,7 @@
     "gulp-sourcemaps": "^2.6.3",
     "icheck": "^1.0.2",
     "jquery": "3.5.0",
-    "jquery-file-upload": "4.0.5",
+    "jquery-file-upload": "4.0.11",
     "jquery-tags-input": "1.3.5",
     "justgage": "1.2.2",
     "moment": "2.29.4",
