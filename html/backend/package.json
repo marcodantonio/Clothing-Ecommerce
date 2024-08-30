@@ -6,7 +6,7 @@
   "dependencies": {
     "@mdi/font": "^2.7.94",
     "ace-builds": "^1.2.9",
-    "bootstrap": "^4.5.0",
+    "bootstrap": "^5.3.3",
     "chart.js": "2.9.4",
     "codemirror": "5.58.2",
     "del": "2.2.2",
